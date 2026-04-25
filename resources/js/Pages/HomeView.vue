@@ -134,78 +134,133 @@
         <!-- Spell Casting Section -->
         <section class="bg-[#0A111E] py-24 px-6">
             <div class="max-w-7xl mx-auto grid grid-cols-5 gap-16 items-center">
-
                 <!-- Column 1: Spell Casting Interface (40%) -->
                 <div class="col-span-2 flex flex-col gap-6 items-center">
-
                     <!-- Letter Grid using CSS Grid -->
-                    <div class="grid gap-2" style="grid-template-columns: repeat(4, 5rem)">
+                    <div
+                        class="grid gap-2"
+                        style="grid-template-columns: repeat(4, 5.75rem)"
+                    >
                         <!-- S -->
-                        <div class="w-20 h-20 flex items-center justify-center bg-[#0D1526] border-b-2 border-[#A855F7]">
-                            <span class="text-[#A855F7] text-4xl font-pixel">S</span>
+                        <div
+                            class="w-23 h-23 flex items-center justify-center bg-[#0D1526] border-b-4 border-[#A855F7]"
+                        >
+                            <span class="text-[#A855F7] text-4xl font-pixel"
+                                >S</span
+                            >
                         </div>
                         <!-- P -->
-                        <div class="w-20 h-20 flex items-center justify-center bg-[#0D1526] border-b-2 border-[#A855F7]">
-                            <span class="text-[#A855F7] text-4xl font-pixel">P</span>
+                        <div
+                            class="w-23 h-23 flex items-center justify-center bg-[#0D1526] border-b-4 border-[#A855F7]"
+                        >
+                            <span class="text-[#A855F7] text-4xl font-pixel"
+                                >P</span
+                            >
                         </div>
                         <!-- E -->
-                        <div class="w-20 h-20 flex items-center justify-center bg-[#0D1526] border-b-2 border-[#A855F7]">
-                            <span class="text-[#A855F7] text-4xl font-pixel">E</span>
+                        <div
+                            class="w-23 h-23 flex items-center justify-center bg-[#0D1526] border-b-4 border-[#A855F7]"
+                        >
+                            <span class="text-[#A855F7] text-4xl font-pixel"
+                                >E</span
+                            >
                         </div>
                         <!-- L -->
-                        <div class="w-20 h-20 flex items-center justify-center bg-[#0D1526] border-b-2 border-[#A855F7]">
-                            <span class="text-[#A855F7] text-4xl font-pixel">L</span>
+                        <div
+                            class="w-23 h-23 flex items-center justify-center bg-[#0D1526] border-b-4 border-[#A855F7]"
+                        >
+                            <span class="text-[#A855F7] text-4xl font-pixel"
+                                >L</span
+                            >
                         </div>
                         <!-- L (row 2) -->
-                        <div class="w-20 h-20 flex items-center justify-center bg-[#0D1526] border-b-2 border-[#A855F7]">
-                            <span class="text-[#A855F7] text-4xl font-pixel">L</span>
+                        <div
+                            class="w-23 h-23 flex items-center justify-center bg-[#0D1526] border-b-4 border-[#A855F7]"
+                        >
+                            <span class="text-[#A855F7] text-4xl font-pixel"
+                                >L</span
+                            >
                         </div>
                         <!-- CASTING spans remaining 3 columns -->
                         <div
-                            class="h-20 flex items-center justify-center col-span-3"
-                            style="background: #0D2B28; border: 1.5px solid #2DD4BF; box-shadow: 0 0 10px #2DD4BF40"
+                            class="h-23 flex items-center justify-center col-span-3"
+                            style="
+                                background: #0d2b28;
+                                border: 1.5px solid #2dd4bf;
+                                box-shadow: 0 0 10px #2dd4bf40;
+                            "
                         >
-                            <span class="text-[#99F6E4] text-sm tracking-widest font-pixel">CASTING...</span>
+                            <span
+                                class="text-[#99F6E4] text-sm tracking-widest font-pixel"
+                                >CASTING...</span
+                            >
                         </div>
-                        <!-- Bottom glow bar spanning all 4 columns -->
-                        <div class="col-span-4 h-1" style="background: #A855F7; box-shadow: 0 0 10px #A855F7, 0 0 20px #A855F780"></div>
                     </div>
 
                     <!-- Progression Bar -->
-                    <div class="flex flex-col gap-2 w-full">
-                        <div class="w-full h-2 bg-[#030509] overflow-hidden">
-                            <div class="h-full w-4/5" style="background: #2DD4BF; box-shadow: 0 0 8px #2DD4BF"></div>
+                    <div
+                        class="flex flex-col"
+                        style="width: calc(4 * 5.75rem + 3 * 0.5rem)"
+                    >
+                        <div
+                            class="bg-[#0D1526] px-6 py-4 border border-[#1E2A45]"
+                        >
+                            <span
+                                class="text-[#2DD4BF] text-sm tracking-widest font-pixel"
+                                >SPELL IDENTIFIED:</span
+                            >
+                            <span
+                                class="text-[#F0ABFC] text-sm tracking-widest font-pixel ml-2"
+                                >ARCANE BOLT</span
+                            >
                         </div>
-                        <span class="text-xs tracking-widest bg-clip-text text-transparent" style="background-image: linear-gradient(to right, #a855f7, #f0a8fc)">SPELL IDENTIFIED: ARCANE BOLT</span>
+                        <div class="w-full h-3 bg-[#030509] overflow-hidden">
+                            <div
+                                class="h-full w-4/5"
+                                style="
+                                    background: #2dd4bf;
+                                    box-shadow: 0 0 8px #2dd4bf;
+                                "
+                            ></div>
+                        </div>
                     </div>
                 </div>
 
                 <!-- Column 2: Marketing Copy (60%) -->
-                <div class="col-span-3 flex flex-col gap-8 items-center text-center">
-
+                <div class="col-span-3 flex flex-col gap-8 items-center">
                     <!-- Headline -->
                     <h2
-                        class="text-4xl font-bold leading-tight uppercase font-pixel bg-clip-text text-transparent"
-                        style="background-image: linear-gradient(to bottom, #F0ABFC 50%, #A855F7 50%)"
+                        class="text-6xl font-bold leading-tight uppercase font-pixel bg-clip-text text-transparent"
+                        style="
+                            background-image: linear-gradient(
+                                to bottom,
+                                #f0abfc 50%,
+                                #a855f7 50%
+                            );
+                        "
                     >
-                        YOUR VOCABULARY<br>IS YOUR WEAPON.
+                        YOUR VOCABULARY<br />IS YOUR WEAPON.
                     </h2>
 
                     <!-- Body Text -->
                     <p class="text-slate-400 text-sm leading-relaxed max-w-lg">
-                        In ShucuQuest, typing is fighting. String together complex words to launch devastating spells.
-                        Longer words yield higher critical hits, but time is of the essence as the monsters strike back in real-time.
+                        In ShucuQuest, typing is fighting. String together
+                        complex words to launch devastating spells. Longer words
+                        yield higher critical hits, but time is of the essence
+                        as the monsters strike back in real-time.
                     </p>
 
                     <!-- Feature Icons -->
                     <div class="flex flex-col gap-4">
                         <div class="flex items-center gap-3">
                             <span class="text-[#F0ABFC] text-lg">✦✦✦✦</span>
-                            <span class="text-[#F0ABFC] text-xs tracking-widest font-pixel">DYNAMIC SPELL CONSTRUCTION</span>
+                            <span
+                                class="text-[#F0ABFC] text-xs tracking-widest font-pixel"
+                                >DYNAMIC SPELL CONSTRUCTION</span
+                            >
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
     </div>
