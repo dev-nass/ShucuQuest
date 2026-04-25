@@ -58,8 +58,21 @@
 
         <!-- Hero -->
         <section
-            class="flex flex-col items-center justify-center text-center px-4 pt-40 pb-50"
+            class="relative flex flex-col items-center justify-center text-center px-4 pt-40 pb-50 overflow-hidden"
         >
+            <!-- Knight (left) -->
+            <img
+                src="/public/images/knight.png"
+                alt="Knight"
+                class="hidden lg:block absolute -left-70 -bottom-70 h-[880px] object-contain pointer-events-none select-none brightness-70"
+            />
+            <!-- Mage (right, flipped) -->
+            <img
+                src="/public/images/mage.png"
+                alt="Mage"
+                class="hidden lg:block absolute -right-70 -bottom-70 h-[850px] object-contain pointer-events-none select-none brightness-80"
+                style="transform: scaleX(-1)"
+            />
             <!-- Level badge -->
             <div
                 class="text-[#F0A8FC] text-xs tracking-widest px-4 py-1 mb-8 rounded"
