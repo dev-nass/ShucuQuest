@@ -58,7 +58,7 @@
 
         <!-- Hero -->
         <section
-            class="flex flex-col items-center justify-center text-center px-4 pt-24 pb-16"
+            class="flex flex-col items-center justify-center text-center px-4 pt-40 pb-50"
         >
             <!-- Level badge -->
             <div
@@ -133,9 +133,9 @@
 
         <!-- Spell Casting Section -->
         <section class="bg-[#0A111E] py-24 px-6">
-            <div class="max-w-7xl mx-auto grid grid-cols-5 gap-16 items-center">
+            <div class="max-w-7xl mx-auto grid grid-cols-6 gap-16 items-center">
                 <!-- Column 1: Spell Casting Interface (40%) -->
-                <div class="col-span-2 flex flex-col gap-6 items-center">
+                <div class="col-span-3 flex flex-col gap-6 items-center">
                     <!-- Letter Grid using CSS Grid -->
                     <div
                         class="grid gap-2"
@@ -227,7 +227,7 @@
                 </div>
 
                 <!-- Column 2: Marketing Copy (60%) -->
-                <div class="col-span-3 flex flex-col gap-8 items-center">
+                <div class="col-span-3 flex flex-col gap-8">
                     <!-- Headline -->
                     <h2
                         class="text-6xl font-bold leading-tight uppercase font-pixel bg-clip-text text-transparent"
@@ -252,11 +252,36 @@
 
                     <!-- Feature Icons -->
                     <div class="flex flex-col gap-4">
-                        <div class="flex items-center gap-3">
-                            <span class="text-[#F0ABFC] text-lg">✦✦✦✦</span>
+                        <div class="flex gap-3">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="w-5 h-5 text-[#99F6E4]"
+                                fill="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"
+                                />
+                            </svg>
                             <span
-                                class="text-[#F0ABFC] text-xs tracking-widest font-pixel"
+                                class="text-[#99F6E4] text-xs tracking-widest font-pixel"
                                 >DYNAMIC SPELL CONSTRUCTION</span
+                            >
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="w-5 h-5 text-[#99F6E4]"
+                                fill="currentColor"
+                                viewBox="0 0 24 24"
+                            >
+                                <path
+                                    d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"
+                                />
+                            </svg>
+                            <span
+                                class="text-[#99F6E4] text-xs tracking-widest font-pixel"
+                                >ELEMENTAL AFFILIATES</span
                             >
                         </div>
                     </div>
