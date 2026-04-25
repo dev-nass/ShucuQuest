@@ -3,18 +3,13 @@
 <template>
     <div class="min-h-screen bg-[#0C0F1A]">
         <!-- Navbar gradient border wrapper -->
-        <div
-            class="max-w-7xl mx-auto p-px"
-            style="background: linear-gradient(to right, #f0a8fc, #2dd4bf)"
-        >
-            <nav
-                class="bg-[#0F172A] px-6 py-4 flex items-center justify-between"
-            >
+        <div class="max-w-7xl mx-auto">
+            <nav class="bg-[#0C0F1A] px-6 py-4 flex items-center">
                 <!-- Logo + Title -->
                 <div class="flex items-center gap-3">
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        class="w-8 h-8 text-[#F3E8FF]"
+                        class="w-8 h-8 text-[#A855F7]"
                         viewBox="0 0 24 24"
                         fill="currentColor"
                     >
@@ -23,14 +18,14 @@
                         />
                     </svg>
                     <span
-                        class="text-[#F3E8FF] font-bold tracking-widest text-lg font-pixel"
+                        class="text-[#A855F7] font-bold tracking-widest text-lg font-pixel"
                         style="letter-spacing: 0.2em"
                         >SHUCUQUEST</span
                     >
                 </div>
 
-                <!-- Nav Links + Button -->
-                <div class="flex items-center gap-6">
+                <!-- Nav Links -->
+                <div class="flex items-center gap-6 flex-1 justify-center">
                     <a
                         href="#"
                         class="text-[#F3E8FF] text-sm tracking-widest hover:text-[#A855F7] transition-colors"
@@ -46,13 +41,18 @@
                         class="text-[#F3E8FF] text-sm tracking-widest hover:text-[#A855F7] transition-colors"
                         >GUILDS</a
                     >
-                    <button
-                        class="bg-[#A855F7] text-[#0F172A] text-sm font-bold px-5 py-2 tracking-widest hover:bg-[#9333EA] transition-colors font-pixel"
-                        style="box-shadow: 0 0 14px #a855f7, 0 0 5px #a855f7"
-                    >
-                        PLAY NOW
-                    </button>
                 </div>
+
+                <!-- Button -->
+                <button
+                    class="text-[#0F172A] text-sm font-bold px-5 py-2 tracking-widest hover:opacity-90 transition-opacity font-pixel"
+                    style="
+                        background: linear-gradient(to right, #a855f7, #f0a8fc);
+                        box-shadow: 0 0 16px #a855f7, 0 0 10px #f0a8fc;
+                    "
+                >
+                    PLAY NOW
+                </button>
             </nav>
         </div>
 
@@ -86,14 +86,14 @@
                     "
                 ></div>
                 <h1
-                    class="relative text-8xl font-bold tracking-widest uppercase bg-clip-text text-transparent font-pixel"
+                    class="relative text-9xl font-bold tracking-widest uppercase bg-clip-text text-transparent font-pixel"
                     style="
                         background-image: linear-gradient(
                             to right,
                             #a855f7,
                             #f0a8fc
                         );
-                        letter-spacing: 0.15em;
+                        letter-spacing: 0.1em;
                     "
                 >
                     SHUCUQUEST
@@ -125,7 +125,7 @@
                 <div class="w-px h-10 bg-[#0F172A]"></div>
                 <button
                     class="text-[#A855F7] text-sm tracking-widest px-6 py-3 hover:opacity-90 transition-opacity font-pixel"
-                    style="background-color: #0C0F1A; border: 1px solid #A855F7"
+                    style="background-color: #0c0f1a; border: 1px solid #a855f7"
                 >
                     VIEW TRAILER
                 </button>
