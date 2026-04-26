@@ -7,6 +7,7 @@ const { words, fetchData } = useFetchWords();
 onMounted(async () => {
     await fetchData();
 
+    // TODO: continoue this
     console.log(words.value);
 });
 </script>
