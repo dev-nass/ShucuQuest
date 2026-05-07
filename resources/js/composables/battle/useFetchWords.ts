@@ -2,8 +2,18 @@ import { ref } from "vue";
 import { useGameStates } from "@/stores/useGameStates";
 
 export function useFetchWords() {
-    const { dictionary, selected, wordUsed, grid, score, wordCount } =
-        useGameStates();
+    const {
+        status,
+
+        dictionary,
+        selected,
+        currentWord,
+        wordUsed,
+        grid,
+
+        score,
+        wordCount,
+    } = useGameStates();
 
     const LETTERS =
         "AAAAAABBBBCCCDDDDEEEEEEEEFFFGGGGHHHHIIIIIIJJKKKLLLLLMMMMNNNNNNOOOOOOPPPPQRRRRRSSSSSSTTTTTTUUUUUVVWWWXYYZ";
@@ -174,8 +184,47 @@ export function useFetchWords() {
         console.log(grid.value);
     };
 
+    const toggleTile = (id: number) => {
+        const idx = selected.value.indexOf(id);
+        if (idx === -1) {
+            selected.value.push(id);
+        }
+
+        updateWordDisplay();
+    };
+
+    function updateWordDisplay() {
+        const word = selected.value.map((id) => grid.value[id].letter).join("");
+        currentWord.value = word.split("");
+        const w = word.toLowerCase();
+        if (w.length >= 3) {
+            if (wordUsed.value.has(w)) {
+                setStatus("Already used", "err");
+            } else if (dictionary.value.has(w)) {
+                setStatus("Valid word! Press Enter", "ok");
+            } else {
+                setStatus(
+                    w.length + " letters — keep going or try different letters",
+                    ""
+                );
+            }
+        } else {
+            setStatus(
+                w.length > 0
+                    ? "Need at least 3 letters"
+                    : "Click letters to spell a word",
+                ""
+            );
+        }
+    }
+
+    function setStatus(msg: string, cls: string) {
+        status.value = msg;
+    }
+
     return {
         fetchData,
         initGame,
+        toggleTile,
     };
 }
