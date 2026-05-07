@@ -4,7 +4,8 @@ import { useFetchWords } from "@/composables/battle/useFetchWords";
 import { useGameStates } from "@/stores/useGameStates";
 import { onMounted } from "vue";
 
-const { fetchData, initGame, toggleTile } = useFetchWords();
+const { fetchData, initGame, toggleTile, submitWord, clearSelection } =
+    useFetchWords();
 const { status, dictionary, grid, selected, currentWord } = useGameStates();
 
 onMounted(async () => {
@@ -35,5 +36,15 @@ onMounted(async () => {
         <GridSquare v-for="g in grid" @click="toggleTile(g.id)">
             {{ g.letter }}
         </GridSquare>
+    </div>
+
+    <!-- Action Buttons -->
+    <div>
+        <button class="border border-red-500" @click="submitWord">
+            Submit Word
+        </button>
+        <button class="border border-red-500" @click="clearSelection">
+            New Game
+        </button>
     </div>
 </template>

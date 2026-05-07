@@ -218,13 +218,54 @@ export function useFetchWords() {
         }
     }
 
-    function setStatus(msg: string, cls: string) {
+    const setStatus = (msg: string, cls: string) => {
         status.value = msg;
-    }
+    };
+
+    const submitWord = () => {
+        const word = selected.value
+            .map((id) => grid.value[id].letter)
+            .join("")
+            .toLowerCase();
+        if (word.length < 3) {
+            setStatus("Need at least 3 letters", "err");
+            return;
+        }
+        if (wordUsed.value.has(word)) {
+            setStatus("Already used!", "err");
+            return;
+        }
+        if (!dictionary.value.has(word)) {
+            setStatus("Not a valid word", "err");
+            return;
+        }
+        wordUsed.value.add(word);
+        const pts =
+            word.length <= 3
+                ? 1
+                : word.length <= 4
+                ? 2
+                : word.length <= 5
+                ? 4
+                : word.length * 2;
+        score.value += pts;
+        selected.value.forEach((id) => {
+            grid.value[id].letter = weightedLetter();
+        });
+        clearSelection();
+        setStatus("+" + pts + " pts — " + word.toUpperCase() + "!", "ok");
+    };
+
+    const clearSelection = () => {
+        selected.value = [];
+        updateWordDisplay();
+    };
 
     return {
         fetchData,
         initGame,
         toggleTile,
+        submitWord,
+        clearSelection,
     };
 }
