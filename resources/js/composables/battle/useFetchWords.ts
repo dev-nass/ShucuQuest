@@ -2,8 +2,11 @@ import { ref } from "vue";
 import { useGameStates } from "@/stores/useGameStates";
 
 export function useFetchWords() {
-    const { dictionary } = useGameStates();
-    const words = ref(new Set<string>());
+    const { dictionary, selected, wordUsed, grid, score, wordCount } =
+        useGameStates();
+
+    const LETTERS =
+        "AAAAAABBBBCCCDDDDEEEEEEEEFFFGGGGHHHHIIIIIIJJKKKLLLLLMMMMNNNNNNOOOOOOPPPPQRRRRRSSSSSSTTTTTTUUUUUVVWWWXYYZ";
 
     const fetchData = async (): Promise<void> => {
         try {
@@ -140,8 +143,39 @@ export function useFetchWords() {
         return result;
     };
 
+    /**
+     * Description: Picks a random index and return a random letter
+     */
+    function weightedLetter() {
+        return LETTERS[Math.floor(Math.random() * LETTERS.length)];
+    }
+
+    /**
+     * Description: Properly reset the states of the game
+     */
+    const resetGame = () => {
+        score.value = 0;
+        wordCount.value = 0;
+        selected.value = [];
+        wordUsed.value = new Set();
+        grid.value = [];
+    };
+
+    const initGame = () => {
+        resetGame();
+        const seeds = getSeedWords(6);
+        const seedLetters = seeds.join("").toUpperCase().split("");
+        const allLetters = [...seedLetters];
+        while (allLetters.length < 24) allLetters.push(weightedLetter());
+        allLetters.sort(() => Math.random() - 0.5);
+        for (let i = 0; i < 24; i++)
+            grid.value.push({ letter: allLetters[i], id: i });
+
+        console.log(grid.value);
+    };
+
     return {
-        words,
         fetchData,
+        initGame,
     };
 }
