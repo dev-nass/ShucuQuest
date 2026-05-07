@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import { useFetchWords } from "@/composables/battle/useFetchWords";
+import { useGameStates } from "@/stores/useGameStates";
 import { onMounted } from "vue";
 
-const { words, fetchData } = useFetchWords();
+const { fetchData } = useFetchWords();
+const { dictionary } = useGameStates();
 
 onMounted(async () => {
     await fetchData();
 
     // TODO: continoue this
-    console.log(words.value);
+    console.log(dictionary.value);
 });
 </script>
 

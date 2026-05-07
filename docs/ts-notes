@@ -1,0 +1,15 @@
+Generic Parameter 
+
+const set = new Set<string>()
+const map = new Map<string, number>()
+const r = ref<boolean>(false)
+
+
+Type Annotation
+
+const grid: Array<string> = []  // same as string[]
+
+new Set<string>() — generic parameter, tells TypeScript what type the Set holds
+string[] — array type annotation, tells TypeScript the variable is an array of strings
+
+
