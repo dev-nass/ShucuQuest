@@ -25,7 +25,7 @@ export function useAttack() {
     /**
      * Description: Validate the currentWord before the attack sequence
      * */
-    const submitWord = () => {
+    const submitWord = (): void => {
         const word = selected.value
             .map((id) => grid.value[id].letter)
             .join("")
@@ -63,7 +63,7 @@ export function useAttack() {
      * Description: Ensure that after submitting the states for attacking will be reset
      *              and also used for "New Game" buttton
      */
-    const clearSelection = () => {
+    const clearSelection = (): void => {
         isValidToAttack.value = false;
         selected.value = [];
         updateWordDisplay();

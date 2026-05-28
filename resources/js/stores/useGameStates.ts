@@ -1,22 +1,23 @@
 import { ref } from "vue";
 
-const RANDOM_LETTERS_COUNT: number = 16;
-
-const status = ref<string>("");
-
+// FETCH STATES
 const dictionary = ref(new Set<string>());
+
+// WORD STATES
 const grid = ref<any[]>([]); // the grid of shuffled letters where users can pick
 const selected = ref<number[]>([]); // holds the ID currently selected letters
 const currentWord = ref<string[]>([]); // current word being spelled
 const wordUsed = ref(new Set<string>()); // words that are already used
 
-const score = ref<number>(0);
-const wordCount = ref<number>(0);
+// DISPLAY STATES
+const status = ref<string>("");
 
+// GAME STATES
+const RANDOM_LETTERS_COUNT: number = 16;
+const score = ref<number>(0);
 const isValidToAttack = ref<boolean>(false);
 
-// ANIMATION STATES
-
+// ANIMATION STATES (UI)
 const knightClass = ref<string>();
 const dragonClass = ref<string>();
 
@@ -33,7 +34,6 @@ export function useGameStates() {
         wordUsed,
 
         score,
-        wordCount,
 
         isValidToAttack,
 

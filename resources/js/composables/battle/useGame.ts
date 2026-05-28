@@ -11,7 +11,6 @@ export function useGame() {
         grid,
 
         score,
-        wordCount,
     } = useGameStates();
 
     const { getSeedWords, weightedLetter } = useWords();
@@ -22,7 +21,6 @@ export function useGame() {
      */
     const resetGame = () => {
         score.value = 0;
-        wordCount.value = 0;
         selected.value = [];
         wordUsed.value = new Set();
         grid.value = [];
