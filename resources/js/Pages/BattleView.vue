@@ -73,7 +73,12 @@ onMounted(async () => {
         <div class="flex flex-col items-center gap-6">
             <!-- Grid of letters -->
             <div class="grid grid-cols-6 gap-3">
-                <GridSquare v-for="g in grid" @click="toggleTile(g.id)">
+                <GridSquare
+                    v-for="g in grid"
+                    :key="g.id"
+                    :selected="selected.includes(g.id)"
+                    @click="toggleTile(g.id)"
+                >
                     {{ g.letter }}
                 </GridSquare>
             </div>
