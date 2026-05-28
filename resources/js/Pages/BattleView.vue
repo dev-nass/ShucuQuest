@@ -62,11 +62,11 @@ onMounted(async () => {
 <template>
     <div class="min-h-screen bg-[#0C0F1A] flex flex-col px-6 py-12">
         <!-- Top Status -->
-        <div class="text-center mb-8">
-            <h1 class="text-white font-pixel text-2xl">
-                Current Status: {{ status }}
-            </h1>
-        </div>
+        <!-- <div class="text-center mb-8"> -->
+        <!--     <h1 class="text-white font-pixel text-2xl"> -->
+        <!--         Current Status: {{ status }} -->
+        <!--     </h1> -->
+        <!-- </div> -->
 
         <!-- Middle Section -->
         <div class="flex-1 flex items-center mb-8">
@@ -81,7 +81,7 @@ onMounted(async () => {
                         class="lg:flex-1 lg:flex lg:justify-start lg:pl-8"
                     >
                         <div
-                            class="w-40 h-40 sm:w-52 sm:h-52 lg:w-64 lg:h-64 bg-[#0D1526] border-2 border-[#A855F7] flex items-center justify-center"
+                            class="w-40 h-40 sm:w-52 sm:h-52 lg:w-75 lg:h-75 bg-[#0D1526] border-2 border-[#A855F7] flex items-center justify-center"
                         >
                             <span class="text-[#A855F7] font-pixel text-sm">
                                 <span class="text-[#A855F7] font-pixel text-sm">
@@ -99,7 +99,7 @@ onMounted(async () => {
                         class="lg:flex-1 lg:flex lg:justify-end lg:pr-8"
                     >
                         <div
-                            class="w-40 h-40 sm:w-52 sm:h-52 lg:w-64 lg:h-64 bg-[#0D1526] border-2 border-[#A855F7] flex items-center justify-center"
+                            class="w-40 h-40 sm:w-52 sm:h-52 lg:w-75 lg:h-75 bg-[#0D1526] border-2 border-[#A855F7] flex items-center justify-center"
                         >
                             <span class="text-[#A855F7] font-pixel text-sm">
                                 <img
@@ -130,7 +130,7 @@ onMounted(async () => {
 
         <!-- Bottom Section: Grid + Buttons -->
         <div class="flex flex-col items-center gap-6">
-            <div class="grid grid-cols-6 gap-3">
+            <div class="grid grid-cols-7 gap-3">
                 <GridSquare
                     v-for="g in grid"
                     :key="g.id"

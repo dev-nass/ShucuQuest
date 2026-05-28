@@ -20,6 +20,10 @@
     font-optical-sizing: auto;
 }
 
+/* TODO: create different type of animation showing the entensity of the attack */
+/* TODO: create different type of attack for different characters */
+/* TODO: create different type of attack for different enemies */
+
 /* Knight pre-attack shake — builds anticipation */
 @keyframes knight-shake {
     0% {
