@@ -21,7 +21,7 @@ export function useFetchWords() {
     const fetchData = async (): Promise<void> => {
         try {
             const response = await fetch(
-                "https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt"
+                "https://raw.githubusercontent.com/dwyl/english-words/master/words_alpha.txt",
             );
 
             if (!response.ok) {
@@ -30,7 +30,7 @@ export function useFetchWords() {
 
             const data = await response.text();
             data.split("\n").forEach((word) =>
-                dictionary.value.add(word.trim())
+                dictionary.value.add(word.trim()),
             );
         } catch (error) {
             throw new Error(`Failed to fetch ${error}`);
@@ -184,11 +184,24 @@ export function useFetchWords() {
         console.log(grid.value);
     };
 
+    /**
+     * used for adding the letter on the selected
+     */
     const toggleTile = (id: number) => {
         const idx = selected.value.indexOf(id);
         if (idx === -1) {
             selected.value.push(id);
         }
+
+        updateWordDisplay();
+    };
+
+    const removeLetter = (id: number): void => {
+        if (id === -1) {
+            console.warn("Letter cant be found; It cant be remove");
+            return;
+        }
+        selected.value.splice(id, 1);
 
         updateWordDisplay();
     };
@@ -205,7 +218,7 @@ export function useFetchWords() {
             } else {
                 setStatus(
                     w.length + " letters — keep going or try different letters",
-                    ""
+                    "",
                 );
             }
         } else {
@@ -213,7 +226,7 @@ export function useFetchWords() {
                 w.length > 0
                     ? "Need at least 3 letters"
                     : "Click letters to spell a word",
-                ""
+                "",
             );
         }
     }
@@ -244,10 +257,10 @@ export function useFetchWords() {
             word.length <= 3
                 ? 1
                 : word.length <= 4
-                ? 2
-                : word.length <= 5
-                ? 4
-                : word.length * 2;
+                  ? 2
+                  : word.length <= 5
+                    ? 4
+                    : word.length * 2;
         score.value += pts;
         selected.value.forEach((id) => {
             grid.value[id].letter = weightedLetter();
@@ -264,7 +277,10 @@ export function useFetchWords() {
     return {
         fetchData,
         initGame,
+
         toggleTile,
+        removeLetter,
+
         submitWord,
         clearSelection,
     };
