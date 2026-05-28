@@ -56,7 +56,6 @@ export function useAttack() {
         selected.value.forEach((id) => {
             grid.value[id].letter = weightedLetter();
         });
-        clearSelection();
         setStatus("+" + pts + " pts — " + word.toUpperCase() + "!", "ok");
     };
 
@@ -72,6 +71,8 @@ export function useAttack() {
 
     const handleSubmitAndAttack = async (): Promise<void> => {
         submitWord();
+        if (!isValidToAttack.value) return;
+
         // 1. Knight shake (anticipation)
         knightClass.value = "animate-knight-shake";
         await wait(300);
@@ -85,6 +86,8 @@ export function useAttack() {
         await wait(700);
         knightClass.value = "";
         dragonClass.value = "";
+
+        clearSelection();
     };
 
     function wait(ms: number): Promise<void> {
