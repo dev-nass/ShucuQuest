@@ -209,6 +209,8 @@ export function useFetchWords() {
     function updateWordDisplay() {
         const word = selected.value.map((id) => grid.value[id].letter).join("");
         currentWord.value = word.split("");
+        // TODO: remove this
+        console.log(currentWord.value);
         const w = word.toLowerCase();
         if (w.length >= 3) {
             if (wordUsed.value.has(w)) {
