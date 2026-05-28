@@ -1,5 +1,7 @@
 import { ref } from "vue";
 
+const RANDOM_LETTERS_COUNT: number = 16;
+
 const status = ref<string>("");
 
 const dictionary = ref(new Set<string>());
@@ -15,6 +17,8 @@ const isValidToAttack = ref<boolean>(false);
 
 export function useGameStates() {
     return {
+        RANDOM_LETTERS_COUNT,
+
         status,
 
         dictionary,

@@ -130,7 +130,7 @@ onMounted(async () => {
 
         <!-- Bottom Section: Grid + Buttons -->
         <div class="flex flex-col items-center gap-6">
-            <div class="grid grid-cols-7 gap-3">
+            <div class="grid grid-cols-4 gap-3">
                 <GridSquare
                     v-for="g in grid"
                     :key="g.id"

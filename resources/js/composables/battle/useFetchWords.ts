@@ -3,6 +3,8 @@ import { useGameStates } from "@/stores/useGameStates";
 
 export function useFetchWords() {
     const {
+        RANDOM_LETTERS_COUNT,
+
         status,
 
         dictionary,
@@ -176,9 +178,10 @@ export function useFetchWords() {
         const seeds = getSeedWords(6);
         const seedLetters = seeds.join("").toUpperCase().split("");
         const allLetters = [...seedLetters];
-        while (allLetters.length < 24) allLetters.push(weightedLetter());
+        while (allLetters.length < RANDOM_LETTERS_COUNT)
+            allLetters.push(weightedLetter());
         allLetters.sort(() => Math.random() - 0.5);
-        for (let i = 0; i < 24; i++)
+        for (let i = 0; i < RANDOM_LETTERS_COUNT; i++)
             grid.value.push({ letter: allLetters[i], id: i });
 
         console.log(grid.value);
