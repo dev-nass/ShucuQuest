@@ -1,57 +1,19 @@
 <script setup lang="ts">
 import GridSquare from "@/Components/GridSquare.vue";
+import { useAttack } from "@/composables/battle/useAttack";
 import { useFetchWords } from "@/composables/battle/useFetchWords";
+import { useGame } from "@/composables/battle/useGame";
+import { useWords } from "@/composables/battle/useWords";
 import { useGameStates } from "@/stores/useGameStates";
 import { onMounted, ref, watch } from "vue";
 
-const {
-    fetchData,
-    initGame,
-    toggleTile,
-    removeLetter,
-    submitWord,
-    clearSelection,
-} = useFetchWords();
-const { status, dictionary, grid, selected, currentWord, isValidToAttack } =
+const { status, grid, selected, currentWord, knightClass, dragonClass } =
     useGameStates();
 
-const isAttacking = ref(false);
-const isHitting = ref(false);
-
-const knightClass = ref<string>();
-const dragonClass = ref<string>();
-
-const handleSubmitAndAttack = async (): Promise<void> => {
-    submitWord();
-    // 1. Knight shake (anticipation)
-    knightClass.value = "animate-knight-shake";
-    await wait(300);
-
-    // 2. Knight dashes + dragon gets hit simultaneously
-    knightClass.value = "animate-knight-attack";
-    await wait(220); // delay hit to sync with slash impact
-    dragonClass.value = "animate-dragon-hit";
-
-    // 3. Clean up
-    await wait(700);
-    knightClass.value = "";
-    dragonClass.value = "";
-};
-
-function wait(ms: number): Promise<void> {
-    return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
-watch(
-    () => selected.value.length,
-    (selectedCount) => {
-        if (selectedCount >= 3) {
-            isValidToAttack.value = true;
-        } else {
-            isValidToAttack.value = false;
-        }
-    },
-);
+const { fetchData } = useFetchWords();
+const { initGame, toggleTile } = useGame();
+const { removeLetter } = useWords();
+const { clearSelection, handleSubmitAndAttack } = useAttack();
 
 onMounted(async () => {
     await fetchData();
@@ -62,11 +24,11 @@ onMounted(async () => {
 <template>
     <div class="min-h-screen bg-[#0C0F1A] flex flex-col px-6 py-12">
         <!-- Top Status -->
-        <!-- <div class="text-center mb-8"> -->
-        <!--     <h1 class="text-white font-pixel text-2xl"> -->
-        <!--         Current Status: {{ status }} -->
-        <!--     </h1> -->
-        <!-- </div> -->
+        <div class="text-center mb-8">
+            <h1 class="text-white font-pixel text-2xl">
+                Current Status: {{ status }}
+            </h1>
+        </div>
 
         <!-- Middle Section -->
         <div class="flex-1 flex items-center mb-8">
@@ -142,17 +104,12 @@ onMounted(async () => {
             </div>
             <div class="flex gap-4">
                 <button
-                    :disabled="!isValidToAttack"
-                    class="text-sm font-bold tracking-widest px-6 py-3 font-pixel transition-all duration-200"
-                    :class="
-                        isValidToAttack
-                            ? 'text-[#0F172A]'
-                            : 'text-[#4B3A5A] cursor-not-allowed'
-                    "
-                    :style="
-                        isValidToAttack
-                            ? 'background: linear-gradient(to right, #a855f7, #f0a8fc); box-shadow: 0 0 16px #a855f7, 0 0 10px #f0a8fc;'
-                            : 'background: #1A1128; border: 1px solid #3D2B4F;'
+                    class="text-[ #0F172A] text-sm font-bold tracking-widest px-6 py-3 font-pixel"
+                    style="
+                        background: linear-gradient(to right, #a855f7, #f0a8fc);
+                        box-shadow:
+                            0 0 16px #a855f7,
+                            0 0 10px #f0a8fc;
                     "
                     @click="handleSubmitAndAttack()"
                 >

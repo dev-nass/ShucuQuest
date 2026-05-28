@@ -15,6 +15,11 @@ const wordCount = ref<number>(0);
 
 const isValidToAttack = ref<boolean>(false);
 
+// ANIMATION STATES
+
+const knightClass = ref<string>();
+const dragonClass = ref<string>();
+
 export function useGameStates() {
     return {
         RANDOM_LETTERS_COUNT,
@@ -31,5 +36,9 @@ export function useGameStates() {
         wordCount,
 
         isValidToAttack,
+
+        // ANIMATION STATES
+        knightClass,
+        dragonClass,
     };
 }
