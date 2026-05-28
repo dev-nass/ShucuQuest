@@ -11,6 +11,8 @@ const wordUsed = ref(new Set<string>()); // words that are already used
 const score = ref<number>(0);
 const wordCount = ref<number>(0);
 
+const isValidToAttack = ref<boolean>(false);
+
 export function useGameStates() {
     return {
         status,
@@ -23,5 +25,7 @@ export function useGameStates() {
 
         score,
         wordCount,
+
+        isValidToAttack,
     };
 }

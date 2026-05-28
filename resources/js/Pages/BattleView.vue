@@ -2,7 +2,7 @@
 import GridSquare from "@/Components/GridSquare.vue";
 import { useFetchWords } from "@/composables/battle/useFetchWords";
 import { useGameStates } from "@/stores/useGameStates";
-import { onMounted } from "vue";
+import { onMounted, watch } from "vue";
 
 const {
     fetchData,
@@ -12,7 +12,19 @@ const {
     submitWord,
     clearSelection,
 } = useFetchWords();
-const { status, dictionary, grid, selected, currentWord } = useGameStates();
+const { status, dictionary, grid, selected, currentWord, isValidToAttack } =
+    useGameStates();
+
+watch(
+    () => selected.value.length,
+    (selectedCount) => {
+        if (selectedCount === 3) {
+            isValidToAttack.value = true;
+        } else {
+            isValidToAttack.value = false;
+        }
+    },
+);
 
 onMounted(async () => {
     await fetchData();
@@ -97,14 +109,19 @@ onMounted(async () => {
             </div>
             <div class="flex gap-4">
                 <button
-                    class="text-[#0F172A] text-sm font-bold tracking-widest px-6 py-3 font-pixel"
-                    style="
-                        background: linear-gradient(to right, #a855f7, #f0a8fc);
-                        box-shadow:
-                            0 0 16px #a855f7,
-                            0 0 10px #f0a8fc;
+                    :disabled="!isValidToAttack"
+                    class="text-sm font-bold tracking-widest px-6 py-3 font-pixel transition-all duration-200"
+                    :class="
+                        isValidToAttack
+                            ? 'text-[#0F172A]'
+                            : 'text-[#4B3A5A] cursor-not-allowed'
                     "
-                    @click="submitWord"
+                    :style="
+                        isValidToAttack
+                            ? 'background: linear-gradient(to right, #a855f7, #f0a8fc); box-shadow: 0 0 16px #a855f7, 0 0 10px #f0a8fc;'
+                            : 'background: #1A1128; border: 1px solid #3D2B4F;'
+                    "
+                    @click="submitWord()"
                 >
                     ATTACK
                 </button>
