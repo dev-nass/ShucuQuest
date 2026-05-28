@@ -41,9 +41,14 @@ onMounted(async () => {
                         <div
                             class="w-40 h-40 sm:w-52 sm:h-52 lg:w-64 lg:h-64 bg-[#0D1526] border-2 border-[#A855F7] flex items-center justify-center"
                         >
-                            <span class="text-[#A855F7] font-pixel text-sm"
-                                >CHARACTER 1</span
-                            >
+                            <span class="text-[#A855F7] font-pixel text-sm">
+                                <span class="text-[#A855F7] font-pixel text-sm">
+                                    <img
+                                        src="/public/images/knight.png"
+                                        alt="dragon"
+                                    />
+                                </span>
+                            </span>
                         </div>
                     </div>
                     <!-- Right Character -->
@@ -51,9 +56,12 @@ onMounted(async () => {
                         <div
                             class="w-40 h-40 sm:w-52 sm:h-52 lg:w-64 lg:h-64 bg-[#0D1526] border-2 border-[#A855F7] flex items-center justify-center"
                         >
-                            <span class="text-[#A855F7] font-pixel text-sm"
-                                >CHARACTER 2</span
-                            >
+                            <span class="text-[#A855F7] font-pixel text-sm">
+                                <img
+                                    src="/public/images/dragon.png"
+                                    alt="dragon"
+                                />
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -98,7 +106,7 @@ onMounted(async () => {
                     "
                     @click="submitWord"
                 >
-                    SUBMIT WORD
+                    ATTACK
                 </button>
                 <button
                     class="text-[#A855F7] text-sm tracking-widest px-6 py-3 font-pixel"
