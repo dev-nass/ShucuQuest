@@ -2,7 +2,7 @@
 import GridSquare from "@/Components/GridSquare.vue";
 import { useFetchWords } from "@/composables/battle/useFetchWords";
 import { useGameStates } from "@/stores/useGameStates";
-import { onMounted, watch } from "vue";
+import { onMounted, ref, watch } from "vue";
 
 const {
     fetchData,
@@ -15,10 +15,37 @@ const {
 const { status, dictionary, grid, selected, currentWord, isValidToAttack } =
     useGameStates();
 
+const isAttacking = ref(false);
+const isHitting = ref(false);
+
+const knightClass = ref<string>();
+const dragonClass = ref<string>();
+
+const handleSubmitAndAttack = async (): Promise<void> => {
+    submitWord();
+    // 1. Knight shake (anticipation)
+    knightClass.value = "animate-knight-shake";
+    await wait(300);
+
+    // 2. Knight dashes + dragon gets hit simultaneously
+    knightClass.value = "animate-knight-attack";
+    await wait(220); // delay hit to sync with slash impact
+    dragonClass.value = "animate-dragon-hit";
+
+    // 3. Clean up
+    await wait(700);
+    knightClass.value = "";
+    dragonClass.value = "";
+};
+
+function wait(ms: number): Promise<void> {
+    return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 watch(
     () => selected.value.length,
     (selectedCount) => {
-        if (selectedCount === 3) {
+        if (selectedCount >= 3) {
             isValidToAttack.value = true;
         } else {
             isValidToAttack.value = false;
@@ -49,7 +76,10 @@ onMounted(async () => {
                 <!-- Characters row (sm/md) | pushed to edges (lg) -->
                 <div class="flex justify-between lg:contents">
                     <!-- Left Character -->
-                    <div class="lg:flex-1 lg:flex lg:justify-start lg:pl-8">
+                    <div
+                        :class="knightClass"
+                        class="lg:flex-1 lg:flex lg:justify-start lg:pl-8"
+                    >
                         <div
                             class="w-40 h-40 sm:w-52 sm:h-52 lg:w-64 lg:h-64 bg-[#0D1526] border-2 border-[#A855F7] flex items-center justify-center"
                         >
@@ -64,7 +94,10 @@ onMounted(async () => {
                         </div>
                     </div>
                     <!-- Right Character -->
-                    <div class="lg:flex-1 lg:flex lg:justify-end lg:pr-8">
+                    <div
+                        :class="dragonClass"
+                        class="lg:flex-1 lg:flex lg:justify-end lg:pr-8"
+                    >
                         <div
                             class="w-40 h-40 sm:w-52 sm:h-52 lg:w-64 lg:h-64 bg-[#0D1526] border-2 border-[#A855F7] flex items-center justify-center"
                         >
@@ -121,7 +154,7 @@ onMounted(async () => {
                             ? 'background: linear-gradient(to right, #a855f7, #f0a8fc); box-shadow: 0 0 16px #a855f7, 0 0 10px #f0a8fc;'
                             : 'background: #1A1128; border: 1px solid #3D2B4F;'
                     "
-                    @click="submitWord()"
+                    @click="handleSubmitAndAttack()"
                 >
                     ATTACK
                 </button>
