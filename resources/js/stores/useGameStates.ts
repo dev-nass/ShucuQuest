@@ -20,6 +20,8 @@ const isValidToAttack = ref<boolean>(false);
 // ANIMATION STATES (UI)
 const knightClass = ref<string>();
 const dragonClass = ref<string>();
+const fireballVisible = ref<boolean>(false);
+const fireballClass = ref<string>();
 
 export function useGameStates() {
     return {
@@ -40,5 +42,7 @@ export function useGameStates() {
         // ANIMATION STATES
         knightClass,
         dragonClass,
+        fireballVisible,
+        fireballClass,
     };
 }

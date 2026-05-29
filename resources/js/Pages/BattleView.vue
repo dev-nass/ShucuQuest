@@ -7,8 +7,16 @@ import { useWords } from "@/composables/battle/useWords";
 import { useGameStates } from "@/stores/useGameStates";
 import { onMounted, ref, watch } from "vue";
 
-const { status, grid, selected, currentWord, knightClass, dragonClass } =
-    useGameStates();
+const {
+    status,
+    grid,
+    selected,
+    currentWord,
+    knightClass,
+    dragonClass,
+    fireballVisible,
+    fireballClass,
+} = useGameStates();
 
 const { fetchData } = useFetchWords();
 const { initGame, toggleTile } = useGame();
@@ -55,6 +63,19 @@ onMounted(async () => {
                             </span>
                         </div>
                     </div>
+
+                    <span
+                        v-if="fireballVisible"
+                        :class="fireballClass"
+                        class="absolute -rotate-180"
+                    >
+                        <img
+                            src="/public/images/fireball.png"
+                            class="h-[20rem]"
+                            alt="fireball"
+                        />
+                    </span>
+
                     <!-- Right Character -->
                     <div
                         :class="dragonClass"

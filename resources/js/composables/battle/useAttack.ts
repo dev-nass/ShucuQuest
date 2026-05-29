@@ -16,6 +16,8 @@ export function useAttack() {
 
         knightClass,
         dragonClass,
+        fireballVisible,
+        fireballClass,
     } = useGameStates();
 
     // composables
@@ -69,9 +71,14 @@ export function useAttack() {
         updateWordDisplay();
     };
 
+    /**
+     * Description: Submit the attack and apply the animations
+     * */
     const handleSubmitAndAttack = async (): Promise<void> => {
         submitWord();
         if (!isValidToAttack.value) return;
+
+        clearSelection();
 
         // 1. Knight shake (anticipation)
         knightClass.value = "animate-knight-shake";
@@ -87,7 +94,28 @@ export function useAttack() {
         knightClass.value = "";
         dragonClass.value = "";
 
-        clearSelection();
+        // 4. Dragon counter-attack — shake builds rage
+        dragonClass.value = "animate-dragon-shake";
+        await wait(350);
+
+        // 5. Dragon charges — glows red while fireball loads
+        dragonClass.value = "animate-dragon-charge";
+        await wait(500);
+
+        // 6. Fireball launched — show the fireball element and send it flying
+        dragonClass.value = "";
+        fireballVisible.value = true;
+        fireballClass.value = "animate-fireball";
+
+        // 7. Knight takes the hit — sync slightly before fireball lands
+        await wait(360); // ~60% of fireball travel before impact registers
+        knightClass.value = "animate-knight-hit";
+
+        // 8. Clean up everything once all animations settle
+        await wait(750);
+        knightClass.value = "";
+        fireballClass.value = "";
+        fireballVisible.value = false;
     };
 
     function wait(ms: number): Promise<void> {

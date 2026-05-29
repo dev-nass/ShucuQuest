@@ -146,6 +146,165 @@
     }
 }
 
+/* Dragon pre-attack shake — rage building before counter */
+@keyframes dragon-shake {
+    0% {
+        transform: translateX(0) rotate(0deg);
+    }
+    15% {
+        transform: translateX(8px) rotate(4deg);
+    }
+    30% {
+        transform: translateX(-8px) rotate(-4deg);
+    }
+    45% {
+        transform: translateX(6px) rotate(3deg);
+    }
+    60% {
+        transform: translateX(-6px) rotate(-3deg);
+    }
+    80% {
+        transform: translateX(3px) rotate(1.5deg);
+    }
+    100% {
+        transform: translateX(0) rotate(0deg);
+    }
+}
+
+/* Dragon glows red after shaking — charging the fireball */
+@keyframes dragon-charge {
+    0% {
+        filter: brightness(1) saturate(1);
+    }
+    /* ember glow begins */
+    30% {
+        filter: brightness(1.4) saturate(2) sepia(0.4) hue-rotate(-20deg);
+    }
+    /* deep red surge */
+    70% {
+        filter: brightness(2) saturate(4) sepia(0.8) hue-rotate(-35deg);
+    }
+    /* peak charge — dragon pulses bright red */
+    100% {
+        filter: brightness(2.8) saturate(5) sepia(1) hue-rotate(-40deg);
+    }
+}
+
+/* Fireball travels from dragon toward the knight */
+@keyframes fireball-travel {
+    0% {
+        transform: translateX(0) scaleX(1) scaleY(1);
+        opacity: 1;
+    }
+    /* stretches as it accelerates */
+    20% {
+        transform: translateX(calc(var(--fireball-travel, -200px) * 0.2))
+            scaleX(1.4) scaleY(0.75);
+        opacity: 1;
+    }
+    /* mid-flight — fully elongated */
+    55% {
+        transform: translateX(calc(var(--fireball-travel, -200px) * 0.6))
+            scaleX(1.6) scaleY(0.65);
+        opacity: 1;
+    }
+    /* impact — squash and burst */
+    85% {
+        transform: translateX(var(--fireball-travel, -200px)) scaleX(0.6)
+            scaleY(1.5);
+        opacity: 0.9;
+    }
+    /* dissipates on landing */
+    100% {
+        transform: translateX(var(--fireball-travel, -200px)) scaleX(0)
+            scaleY(0);
+        opacity: 0;
+    }
+}
+
+/* Fireball core flicker — simulates living flame */
+@keyframes fireball-flicker {
+    0% {
+        filter: brightness(1.2) saturate(1.5) hue-rotate(0deg);
+    }
+    25% {
+        filter: brightness(1.8) saturate(2.5) hue-rotate(-15deg);
+    }
+    50% {
+        filter: brightness(1.4) saturate(2) hue-rotate(10deg);
+    }
+    75% {
+        filter: brightness(2) saturate(3) hue-rotate(-10deg);
+    }
+    100% {
+        filter: brightness(1.2) saturate(1.5) hue-rotate(0deg);
+    }
+}
+
+/* Knight hit by fireball — recoils and burns */
+@keyframes knight-hit {
+    0% {
+        transform: translateX(0) rotate(0deg) scaleX(1);
+        filter: brightness(1);
+    }
+    /* impact blast — thrown back */
+    8% {
+        transform: translateX(-18px) rotate(-6deg) scaleX(0.9);
+        filter: brightness(3.5) hue-rotate(-30deg) saturate(4);
+    }
+    /* stagger, still burning orange */
+    22% {
+        transform: translateX(-28px) rotate(-10deg) scaleX(0.93);
+        filter: brightness(2) sepia(1) saturate(4) hue-rotate(-20deg);
+    }
+    /* stumble forward — fighting gravity */
+    38% {
+        transform: translateX(-12px) rotate(5deg) scaleX(1.05);
+        filter: brightness(1.4) sepia(0.5) saturate(2);
+    }
+    /* wobble back */
+    55% {
+        transform: translateX(-18px) rotate(-4deg) scaleX(0.96);
+        filter: brightness(1.2);
+    }
+    70% {
+        transform: translateX(-8px) rotate(2deg) scaleX(1.02);
+        filter: brightness(1);
+    }
+    85% {
+        transform: translateX(-4px) rotate(-1deg);
+    }
+    /* settle back to stance */
+    100% {
+        transform: translateX(0) rotate(0deg) scaleX(1);
+        filter: brightness(1);
+    }
+}
+
+/* Knight burn flash — fire-toned damage colour (orange/red, not the white sword flash) */
+@keyframes knight-burn-flash {
+    0% {
+        filter: brightness(1) sepia(0);
+    }
+    /* ignition peak */
+    8% {
+        filter: brightness(3) sepia(1) saturate(6) hue-rotate(-25deg);
+    }
+    /* sustained burn */
+    30% {
+        filter: brightness(1.6) sepia(0.7) saturate(3) hue-rotate(-15deg);
+    }
+    /* embers fade */
+    65% {
+        filter: brightness(1.2) sepia(0.2) saturate(1.5);
+    }
+    100% {
+        filter: brightness(1) sepia(0);
+    }
+}
+
+/* ─── Utility classes ─────────────────────────────────────────────────────── */
+
 .animate-knight-shake {
     animation: knight-shake 0.3s ease-in-out;
 }
@@ -160,4 +319,27 @@
     animation:
         dragon-hit 0.7s cubic-bezier(0.36, 0.07, 0.19, 0.97),
         dragon-flash 0.7s ease-out;
+}
+
+/* Dragon counter-attack — shake fires first, then charge glow overlaps the tail */
+.animate-dragon-shake {
+    animation: dragon-shake 0.35s ease-in-out;
+}
+
+.animate-dragon-charge {
+    animation: dragon-charge 0.5s ease-in forwards;
+}
+
+/* Fireball element — position it absolutely near the dragon's mouth */
+.animate-fireball {
+    animation:
+        fireball-travel 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+        fireball-flicker 0.15s linear infinite;
+}
+
+/* Knight taking a fireball hit */
+.animate-knight-hit {
+    animation:
+        knight-hit 0.75s cubic-bezier(0.36, 0.07, 0.19, 0.97),
+        knight-burn-flash 0.75s ease-out;
 }
