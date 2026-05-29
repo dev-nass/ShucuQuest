@@ -18,6 +18,9 @@ export function useAttack() {
         dragonClass,
         fireballVisible,
         fireballClass,
+
+        playerHealth,
+        enemyHealth,
     } = useGameStates();
 
     // composables
@@ -94,6 +97,8 @@ export function useAttack() {
         knightClass.value = "";
         dragonClass.value = "";
 
+        enemyHealth.value -= 1;
+
         // 4. Dragon counter-attack — shake builds rage
         dragonClass.value = "animate-dragon-shake";
         await wait(350);
@@ -116,6 +121,8 @@ export function useAttack() {
         knightClass.value = "";
         fireballClass.value = "";
         fireballVisible.value = false;
+
+        playerHealth.value -= 1;
     };
 
     function wait(ms: number): Promise<void> {

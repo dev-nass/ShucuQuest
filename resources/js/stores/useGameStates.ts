@@ -23,6 +23,10 @@ const dragonClass = ref<string>();
 const fireballVisible = ref<boolean>(false);
 const fireballClass = ref<string>();
 
+// HP STATES
+const playerHealth = ref<number>(5);
+const enemyHealth = ref<number>(5);
+
 export function useGameStates() {
     return {
         RANDOM_LETTERS_COUNT,
@@ -44,5 +48,9 @@ export function useGameStates() {
         dragonClass,
         fireballVisible,
         fireballClass,
+
+        // HP STATES
+        playerHealth,
+        enemyHealth,
     };
 }
