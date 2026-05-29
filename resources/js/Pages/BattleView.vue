@@ -64,17 +64,14 @@ onMounted(async () => {
                         </div>
                     </div>
 
-                    <span
+                    <img
                         v-if="fireballVisible"
                         :class="fireballClass"
-                        class="absolute -rotate-180"
-                    >
-                        <img
-                            src="/public/images/fireball.png"
-                            class="h-[20rem]"
-                            alt="fireball"
-                        />
-                    </span>
+                        src="/public/images/fireball.png"
+                        alt="fireball"
+                        class="absolute right-[15%] top-1/2 -translate-y-1/2 h-50 pointer-events-none"
+                        style="--fireball-travel: -60vw"
+                    />
 
                     <!-- Right Character -->
                     <div
