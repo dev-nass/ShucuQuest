@@ -27,26 +27,38 @@ export function useAttack() {
     const { setStatus, updateWordDisplay } = useDisplay();
     const { weightedLetter } = useWords();
 
-    /**
-     * Description: Validate the currentWord before the attack sequence
-     * */
-    const submitWord = (): void => {
+    const validateWord = (): string | null => {
         const word = selected.value
             .map((id) => grid.value[id].letter)
             .join("")
             .toLowerCase();
+
         if (word.length < 3) {
             setStatus("Need at least 3 letters", "err");
-            return;
+            return null;
         }
         if (wordUsed.value.has(word)) {
             setStatus("Already used!", "err");
-            return;
+            return null;
         }
         if (!dictionary.value.has(word)) {
             setStatus("Not a valid word", "err");
+            return null;
+        }
+
+        return word;
+    };
+
+    /**
+     * Description: Validate the currentWord before the attack sequence
+     * */
+    const submitWord = (): void => {
+        const word = validateWord();
+
+        if (word === null) {
             return;
         }
+
         isValidToAttack.value = true;
         wordUsed.value.add(word);
         const pts =
@@ -130,6 +142,7 @@ export function useAttack() {
     }
 
     return {
+        validateWord,
         submitWord,
         clearSelection,
         handleSubmitAndAttack,

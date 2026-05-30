@@ -17,6 +17,7 @@ const {
     dragonClass,
     fireballVisible,
     fireballClass,
+    currentWordAnimation,
     playerHealth,
     enemyHealth,
 } = useGameStates();
@@ -111,6 +112,7 @@ onMounted(async () => {
                             <GridSquare
                                 v-for="(c, index) in currentWord"
                                 :key="index"
+                                :animationIntensity="currentWordAnimation"
                                 @click="removeLetter(index)"
                             >
                                 {{ c }}

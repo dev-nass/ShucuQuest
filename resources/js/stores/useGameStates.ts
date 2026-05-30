@@ -22,6 +22,7 @@ const knightClass = ref<string>();
 const dragonClass = ref<string>();
 const fireballVisible = ref<boolean>(false);
 const fireballClass = ref<string>();
+const currentWordAnimation = ref<string>();
 
 // HP STATES
 const playerHealth = ref<number>(5);
@@ -48,6 +49,7 @@ export function useGameStates() {
         dragonClass,
         fireballVisible,
         fireballClass,
+        currentWordAnimation,
 
         // HP STATES
         playerHealth,

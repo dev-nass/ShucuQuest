@@ -1,6 +1,7 @@
 import { useGameStates } from "@/stores/useGameStates";
 import { useWords } from "./useWords";
 import { useDisplay } from "./useDisplay";
+import { useAnimation } from "./useAnimation";
 
 export function useGame() {
     const {
@@ -15,6 +16,7 @@ export function useGame() {
 
     const { getSeedWords, weightedLetter } = useWords();
     const { updateWordDisplay } = useDisplay();
+    const { animateCurrentSelectedWord } = useAnimation();
 
     /**
      * Description: Properly reset the states of the game
@@ -50,6 +52,7 @@ export function useGame() {
         }
 
         updateWordDisplay();
+        animateCurrentSelectedWord();
     };
     return {
         initGame,
