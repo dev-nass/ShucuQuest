@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import GridSquare from "@/Components/GridSquare.vue";
 import PixelHearts from "@/Components/PixelHearts.vue";
+import { useAnimation } from "@/composables/battle/useAnimation";
 import { useAttack } from "@/composables/battle/useAttack";
+import { useDisplay } from "@/composables/battle/useDisplay";
 import { useFetchWords } from "@/composables/battle/useFetchWords";
 import { useGame } from "@/composables/battle/useGame";
 import { useWords } from "@/composables/battle/useWords";
@@ -25,7 +27,15 @@ const {
 const { fetchData } = useFetchWords();
 const { initGame, toggleTile } = useGame();
 const { removeLetter } = useWords();
+const { updateWordDisplay } = useDisplay();
 const { clearSelection, handleSubmitAndAttack } = useAttack();
+const { animateCurrentSelectedWord } = useAnimation();
+
+function handleGridSquareClick(index: number) {
+    removeLetter(index);
+    updateWordDisplay();
+    animateCurrentSelectedWord();
+}
 
 onMounted(async () => {
     await fetchData();
@@ -113,7 +123,7 @@ onMounted(async () => {
                                 v-for="(c, index) in currentWord"
                                 :key="index"
                                 :animationIntensity="currentWordAnimation"
-                                @click="removeLetter(index)"
+                                @click="handleGridSquareClick(index)"
                             >
                                 {{ c }}
                             </GridSquare>

@@ -1,10 +1,7 @@
 import { useGameStates } from "@/stores/useGameStates";
-import { useDisplay } from "./useDisplay";
 
 export function useWords() {
     const { dictionary, selected } = useGameStates();
-
-    const { updateWordDisplay } = useDisplay();
 
     const LETTERS =
         "AAAAAABBBBCCCDDDDEEEEEEEEFFFGGGGHHHHIIIIIIJJKKKLLLLLMMMMNNNNNNOOOOOOPPPPQRRRRRSSSSSSTTTTTTUUUUUVVWWWXYYZ";
@@ -138,8 +135,6 @@ export function useWords() {
             return;
         }
         selected.value.splice(id, 1);
-
-        updateWordDisplay();
     };
 
     return {
