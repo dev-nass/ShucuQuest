@@ -31,6 +31,7 @@ const { updateWordDisplay } = useDisplay();
 const { clearSelection, handleSubmitAndAttack } = useAttack();
 const { animateCurrentSelectedWord } = useAnimation();
 
+// coordinator function
 function handleGridSquareClick(index: number) {
     removeLetter(index);
     updateWordDisplay();
