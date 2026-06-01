@@ -50,10 +50,8 @@ export function useGame() {
         if (idx === -1) {
             selected.value.push(id);
         }
-
-        updateWordDisplay();
-        animateCurrentSelectedWord();
     };
+
     return {
         initGame,
         toggleTile,

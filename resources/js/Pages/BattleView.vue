@@ -31,9 +31,16 @@ const { updateWordDisplay } = useDisplay();
 const { clearSelection, handleSubmitAndAttack } = useAttack();
 const { animateCurrentSelectedWord } = useAnimation();
 
-// coordinator function
+// coordinator functions
+
 function handleGridSquareClick(index: number) {
     removeLetter(index);
+    updateWordDisplay();
+    animateCurrentSelectedWord();
+}
+
+function handleTileClick(id: number) {
+    toggleTile(id);
     updateWordDisplay();
     animateCurrentSelectedWord();
 }
@@ -143,7 +150,7 @@ onMounted(async () => {
                     v-for="g in grid"
                     :key="g.id"
                     :selected="selected.includes(g.id)"
-                    @click="toggleTile(g.id)"
+                    @click="handleTileClick(g.id)"
                 >
                     {{ g.letter }}
                 </GridSquare>
