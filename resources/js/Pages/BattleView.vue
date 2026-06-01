@@ -22,13 +22,19 @@ const {
     currentWordAnimation,
     playerHealth,
     enemyHealth,
+    isValidToAttack,
 } = useGameStates();
 
 const { fetchData } = useFetchWords();
 const { initGame, toggleTile } = useGame();
 const { removeLetter } = useWords();
 const { updateWordDisplay } = useDisplay();
-const { clearSelection, handleSubmitAndAttack } = useAttack();
+const {
+    clearSelection,
+    submitWord,
+    applyPlayerAttackAnimation,
+    applyEnemeyAttackAnimation,
+} = useAttack();
 const { animateCurrentSelectedWord } = useAnimation();
 
 // coordinator functions
@@ -43,6 +49,18 @@ function handleTileClick(id: number) {
     toggleTile(id);
     updateWordDisplay();
     animateCurrentSelectedWord();
+}
+
+/**
+ * Description: Submit the attack and apply the animations
+ * */
+async function handleSubmitAndAttackClick() {
+    submitWord();
+    if (!isValidToAttack.value) return;
+
+    clearSelection(); // clear the selected words before attck
+    await applyPlayerAttackAnimation();
+    await applyEnemeyAttackAnimation();
 }
 
 onMounted(async () => {
@@ -164,7 +182,7 @@ onMounted(async () => {
                             0 0 16px #a855f7,
                             0 0 10px #f0a8fc;
                     "
-                    @click="handleSubmitAndAttack()"
+                    @click="handleSubmitAndAttackClick()"
                 >
                     ATTACK
                 </button>

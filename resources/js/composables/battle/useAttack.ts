@@ -87,14 +87,9 @@ export function useAttack() {
     };
 
     /**
-     * Description: Submit the attack and apply the animations
-     * */
-    const handleSubmitAndAttack = async (): Promise<void> => {
-        submitWord();
-        if (!isValidToAttack.value) return;
-
-        clearSelection();
-
+     * Description: Apply the animation and reduce the health of player
+     */
+    const applyPlayerAttackAnimation = async (): Promise<void> => {
         // 1. Knight shake (anticipation)
         knightClass.value = "animate-knight-shake";
         await wait(300);
@@ -109,8 +104,10 @@ export function useAttack() {
         knightClass.value = "";
         dragonClass.value = "";
 
-        enemyHealth.value -= 1;
+        applyPlayerAttackDamage();
+    };
 
+    const applyEnemeyAttackAnimation = async (): Promise<void> => {
         // 4. Dragon counter-attack — shake builds rage
         dragonClass.value = "animate-dragon-shake";
         await wait(350);
@@ -134,6 +131,14 @@ export function useAttack() {
         fireballClass.value = "";
         fireballVisible.value = false;
 
+        applyEnemyAttackDamage();
+    };
+
+    const applyPlayerAttackDamage = (): void => {
+        enemyHealth.value -= 1;
+    };
+
+    const applyEnemyAttackDamage = (): void => {
         playerHealth.value -= 1;
     };
 
@@ -145,6 +150,8 @@ export function useAttack() {
         validateWord,
         submitWord,
         clearSelection,
-        handleSubmitAndAttack,
+
+        applyPlayerAttackAnimation,
+        applyEnemeyAttackAnimation,
     };
 }
