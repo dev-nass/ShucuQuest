@@ -15,6 +15,10 @@
         "Noto Color Emoji";
 }
 
+body {
+    overflow-x: hidden;
+}
+
 .font-pixel {
     font-family: "Pixelify Sans", sans-serif;
     font-optical-sizing: auto;
