@@ -12,11 +12,12 @@ export function useGame() {
         grid,
 
         score,
+
+        isGameOver,
     } = useGameStates();
 
     const { getSeedWords, weightedLetter } = useWords();
-    const { updateWordDisplay } = useDisplay();
-    const { animateCurrentSelectedWord } = useAnimation();
+    const { setStatus } = useDisplay();
 
     /**
      * Description: Properly reset the states of the game
@@ -52,8 +53,24 @@ export function useGame() {
         }
     };
 
+    /**
+     * 1. Set status — "Victory!" or "Defeated!" to show in the UI (BattleView.vue:65)
+     * 2. Trigger end-game animations — play a victory/defeat pose via knightClass / dragonClass
+     * 3. Gate further input — toggle something (like isGameOver) so handleSubmitAndAttack
+     early-returns and tile clicks are ignored
+     * 4. Maybe show a "Play Again" overlay — so users can call initGame() and start fresh
+     * */
+    const endGame = () => {
+        if (!isGameOver) {
+            return;
+        }
+
+        setStatus("GAME OVER", "ok");
+    };
+
     return {
         initGame,
         toggleTile,
+        endGame,
     };
 }

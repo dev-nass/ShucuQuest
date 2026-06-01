@@ -1,4 +1,4 @@
-import { ref } from "vue";
+import { computed, ref } from "vue";
 
 // FETCH STATES
 const dictionary = ref(new Set<string>());
@@ -15,7 +15,10 @@ const status = ref<string>("");
 // GAME STATES
 const RANDOM_LETTERS_COUNT: number = 16;
 const score = ref<number>(0);
-const isValidToAttack = ref<boolean>(false);
+const isValidToAttack = ref<boolean>(false); // state to be check before submitWord()
+const isGameOver = computed<boolean>(
+    () => playerHealth.value <= 0 || enemyHealth.value <= 0,
+);
 
 // ANIMATION STATES (UI)
 const knightClass = ref<string>();
@@ -43,6 +46,7 @@ export function useGameStates() {
         score,
 
         isValidToAttack,
+        isGameOver,
 
         // ANIMATION STATES
         knightClass,
