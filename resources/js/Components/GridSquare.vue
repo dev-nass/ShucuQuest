@@ -8,20 +8,20 @@ defineProps<{
 <template>
     <div
         class="w-20 h-20 flex items-center justify-center bg-[#0D1526] border-b-4 border-[#A855F7] group"
-        :class="
+        :class="[
             selected
                 ? 'opacity-40 cursor-default border-[#3B0764]'
-                : 'cursor-pointer hover:bg-[#A855F7] hover:border-[#0D1526]'
-        "
+                : 'cursor-pointer hover:bg-[#A855F7] hover:border-[#0D1526]',
+            !selected && animationIntensity,
+        ]"
     >
         <span
             class="text-4xl font-pixel"
-            :class="[
-                animationIntensity,
+            :class="
                 selected
                     ? 'text-[#3B0764]'
-                    : ['text-[#A855F7] group-hover:text-[#0D1526]', !selected],
-            ]"
+                    : 'text-[#A855F7] group-hover:text-[#0D1526]'
+            "
         >
             <slot />
         </span>
@@ -32,12 +32,12 @@ defineProps<{
 @keyframes glow-weak {
     0%,
     100% {
-        text-shadow:
+        box-shadow:
             0 0 4px #a855f7,
             0 0 8px #a855f7;
     }
     50% {
-        text-shadow:
+        box-shadow:
             0 0 8px #a855f7,
             0 0 16px #a855f7,
             0 0 24px #c084fc;
@@ -46,13 +46,13 @@ defineProps<{
 @keyframes glow-medium {
     0%,
     100% {
-        text-shadow:
+        box-shadow:
             0 0 6px #a855f7,
             0 0 12px #a855f7,
             0 0 20px #9333ea;
     }
     50% {
-        text-shadow:
+        box-shadow:
             0 0 12px #c084fc,
             0 0 24px #a855f7,
             0 0 40px #9333ea,
@@ -62,14 +62,14 @@ defineProps<{
 @keyframes glow-strong {
     0%,
     100% {
-        text-shadow:
+        box-shadow:
             0 0 8px #c084fc,
             0 0 18px #a855f7,
             0 0 30px #9333ea,
             0 0 50px #7c3aed;
     }
     50% {
-        text-shadow:
+        box-shadow:
             0 0 16px #e9d5ff,
             0 0 32px #c084fc,
             0 0 55px #a855f7,
@@ -80,7 +80,7 @@ defineProps<{
 @keyframes glow-intense {
     0%,
     100% {
-        text-shadow:
+        box-shadow:
             0 0 10px #f0abfc,
             0 0 22px #e879f9,
             0 0 40px #c026d3,
@@ -88,7 +88,7 @@ defineProps<{
         transform: scale(1);
     }
     50% {
-        text-shadow:
+        box-shadow:
             0 0 20px #fde8ff,
             0 0 40px #f0abfc,
             0 0 70px #e879f9,

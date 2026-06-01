@@ -10,10 +10,10 @@ export function useAnimation() {
 
         if (word === null || word.length < 0 || word.length > 25)
             return (currentWordAnimation.value = "");
-        if (word.length < 6) return (currentWordAnimation.value = "glow-weak");
-        if (word.length < 13)
+        if (word.length < 4) return (currentWordAnimation.value = "glow-weak");
+        if (word.length < 5)
             return (currentWordAnimation.value = "glow-medium");
-        if (word.length < 19)
+        if (word.length < 6)
             return (currentWordAnimation.value = "glow-strong");
         return (currentWordAnimation.value = "glow-intense");
     };
