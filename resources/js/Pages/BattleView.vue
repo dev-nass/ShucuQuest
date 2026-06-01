@@ -51,13 +51,15 @@ onMounted(async () => {
         >
             <!-- Top Status -->
             <div class="flex justify-between">
+                <!-- User Health / User Character Health  -->
                 <PixelHearts :hp="playerHealth" :size="4" />
                 <div class="text-center mb-8">
                     <h1 class="text-white font-pixel text-2xl">
                         Current Status: {{ status }}
                     </h1>
                 </div>
-                <PixelHearts :hp="enemyHealth" :size="4" />
+                <!-- Enemy Health / Enemy Character Health  -->
+                <PixelHearts :hp="enemyHealth" :size="4" class="-scale-x-100" />
             </div>
 
             <!-- Middle Section -->
