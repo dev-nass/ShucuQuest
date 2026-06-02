@@ -87,7 +87,7 @@ defineEmits<{
                                     class="text-base font-semibold"
                                     style="color: #e9c8f5"
                                 >
-                                    Deactivate account
+                                    <slot name="header" />
                                 </h3>
                                 <div class="mt-2">
                                     <p class="text-sm" style="color: #e9c8f5aa">

@@ -7,6 +7,8 @@ export function useGame() {
     const {
         RANDOM_LETTERS_COUNT,
 
+        status,
+
         selected,
         wordUsed,
         grid,
@@ -32,7 +34,7 @@ export function useGame() {
         grid.value = [];
 
         playerHealth.value = 1.5;
-        enemyHealth.value = 2.5;
+        enemyHealth.value = 0.5;
     };
 
     /**
@@ -72,11 +74,13 @@ export function useGame() {
      * 4. Maybe show a "Play Again" overlay — so users can call initGame() and start fresh
      * */
     const endGame = () => {
-        if (!isGameOver) {
+        if (!isGameOver.value) {
             return;
         }
 
-        setStatus("GAME OVER", "ok");
+        playerHealth.value <= 0
+            ? (status.value = "ENEMY WIN")
+            : (status.value = "PLAYER WIN");
     };
 
     return {

@@ -6,7 +6,6 @@ export function useAttack() {
     // states
     const {
         dictionary,
-        currentWord,
         selected,
         wordUsed,
         grid,
@@ -22,6 +21,8 @@ export function useAttack() {
 
         playerHealth,
         enemyHealth,
+
+        isGameOver,
     } = useGameStates();
 
     // composables
@@ -105,7 +106,9 @@ export function useAttack() {
         applyPlayerAttackDamage();
     };
 
-    const applyEnemeyAttackAnimation = async (): Promise<void> => {
+    const applyEnemyAttackAnimation = async (): Promise<void> => {
+        if (isGameOver.value) return;
+
         // 4. Dragon counter-attack — shake builds rage
         dragonClass.value = "animate-dragon-shake";
         await wait(350);
@@ -147,11 +150,11 @@ export function useAttack() {
                     ? 4
                     : word.length * 2;
 
-        console.log("Word", word.length);
-        console.log(enemyHealth.value);
-        console.log(pts);
+        // console.log("Word", word.length);
+        // console.log(enemyHealth.value);
+        // console.log(pts);
         enemyHealth.value -= pts;
-        console.log(enemyHealth.value);
+        // console.log(enemyHealth.value);
 
         score.value += pts;
         setStatus("+" + pts + " pts — " + word.toUpperCase() + "!", "ok");
@@ -171,6 +174,6 @@ export function useAttack() {
         clearSelection,
 
         applyPlayerAttackAnimation,
-        applyEnemeyAttackAnimation,
+        applyEnemyAttackAnimation,
     };
 }

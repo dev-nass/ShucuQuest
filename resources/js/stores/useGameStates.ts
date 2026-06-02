@@ -29,7 +29,7 @@ const currentWordAnimation = ref<string>();
 
 // HP STATES
 const playerHealth = ref<number>(1.5);
-const enemyHealth = ref<number>(1);
+const enemyHealth = ref<number>(0.5);
 
 export function useGameStates() {
     return {

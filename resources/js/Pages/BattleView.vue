@@ -35,7 +35,7 @@ const {
     clearSelection,
     submitWord,
     applyPlayerAttackAnimation,
-    applyEnemeyAttackAnimation,
+    applyEnemyAttackAnimation,
 } = useAttack();
 const { animateCurrentSelectedWord } = useAnimation();
 
@@ -59,11 +59,11 @@ function handleTileClick(id: number) {
  * */
 async function handleSubmitAndAttackClick() {
     const attackValid = submitWord();
-    if (!attackValid) return;
+    if (!attackValid || isGameOver.value) return;
     isPlayersTurn.value = false;
 
     await applyPlayerAttackAnimation();
-    await applyEnemeyAttackAnimation();
+    await applyEnemyAttackAnimation();
 
     clearSelection(); // clear the selected words before attck
     endGame();
@@ -81,7 +81,9 @@ onMounted(async () => {
 </script>
 
 <template>
-    <Modal :open="isGameOver" @close="handleResetClick" />
+    <Modal :open="isGameOver" @close="handleResetClick">
+        <template #header>{{ status }}</template>
+    </Modal>
     <div class="min-h-screen bg-[#0C0F1A] flex flex-col">
         <section
             class="bg-[url('/public/images/dungeon-v2.png')] bg-center bg-no-repeat bg-[size:110%]"
