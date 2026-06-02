@@ -32,11 +32,8 @@ const GRID = [
     [0, 0, 0, 1, 1, 0, 0, 0],
 ];
 
-// Flatten to 1D with column index attached
 const cells = computed(() =>
-    GRID.flatMap((row, r) =>
-        row.map((filled, c) => ({ filled, row: r, col: c })),
-    ),
+    GRID.flatMap((row, _r) => row.map((filled, c) => ({ filled, col: c }))),
 );
 
 const gridStyle = computed<CSSProperties>(() => ({
@@ -48,30 +45,29 @@ const gridStyle = computed<CSSProperties>(() => ({
 }));
 
 /**
- *
- * @return Record<string, string> is shorthand for { [key: string]: string } — an object where keys
-    are strings and values are strings.
+ * Half state: left 4 columns colored, right 4 transparent.
+ * This maps cleanly to .5 HP increments since each heart = 1 HP.
  */
 function cellStyle(cell: {
     filled: number;
-    row: number;
     col: number;
 }): Record<string, string> {
-    if (!cell.filled)
+    if (!cell.filled) {
         return {
             width: props.size + "px",
             height: props.size + "px",
             background: "transparent",
         };
+    }
 
-    let bg = "transparent";
+    let bg: string;
 
     if (props.state === "full") {
         bg = props.color;
     } else if (props.state === "half") {
-        bg = cell.col < 4 ? props.color : "transparent";
+        // left half = colored, right half = transparent (not empty color)
+        bg = cell.col < 4 ? props.color : props.emptyColor;
     } else {
-        // empty
         bg = props.emptyColor;
     }
 

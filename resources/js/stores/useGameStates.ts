@@ -28,7 +28,7 @@ const fireballClass = ref<string>();
 const currentWordAnimation = ref<string>();
 
 // HP STATES
-const playerHealth = ref<number>(1);
+const playerHealth = ref<number>(1.5);
 const enemyHealth = ref<number>(1);
 
 export function useGameStates() {

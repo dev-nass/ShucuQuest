@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { ref, watch, computed } from "vue";
 import PixelHeart from "./PixelHeartIcon.vue";
 
 const props = defineProps({
@@ -7,7 +7,7 @@ const props = defineProps({
         type: Number,
         default: 3,
     },
-    maxHearts: {
+    maxHp: {
         type: Number,
         default: 5,
     },
@@ -27,7 +27,19 @@ const props = defineProps({
 
 const isShaking = ref(false);
 
-function getHeartState(index: number): string {
+/**
+ * Number of heart slots = ceil(maxHp).
+ * e.g. maxHp=5 → 5 hearts, maxHp=4.5 → 5 hearts (last starts as half when full)
+ */
+const heartSlots = computed(() => Math.ceil(props.maxHp));
+
+/**
+ * Each heart slot covers 1 full HP unit (index 1-based).
+ * - remaining >= 1   → full
+ * - remaining >= 0.5 → half  (handles all .5 damage increments)
+ * - remaining <  0.5 → empty
+ */
+function getHeartState(index: number): "full" | "half" | "empty" {
     const remaining = props.hp - (index - 1);
     if (remaining >= 1) return "full";
     if (remaining >= 0.5) return "half";
@@ -44,9 +56,10 @@ watch(
     },
 );
 </script>
+
 <template>
     <div class="pixel-hearts" :class="{ shake: isShaking }">
-        <div v-for="i in maxHearts" :key="i" class="heart-wrapper">
+        <div v-for="i in heartSlots" :key="i" class="heart-wrapper">
             <PixelHeart
                 :state="getHeartState(i)"
                 :size="size"
