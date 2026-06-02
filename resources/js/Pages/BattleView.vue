@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import GridSquare from "@/Components/GridSquare.vue";
+import Modal from "@/Components/Modal.vue";
 import PixelHearts from "@/Components/PixelHearts.vue";
 import { useAnimation } from "@/composables/battle/useAnimation";
 import { useAttack } from "@/composables/battle/useAttack";
@@ -26,7 +27,7 @@ const {
 } = useGameStates();
 
 const { fetchData } = useFetchWords();
-const { initGame, toggleTile } = useGame();
+const { initGame, toggleTile, endGame } = useGame();
 const { removeLetter } = useWords();
 const { updateWordDisplay } = useDisplay();
 const {
@@ -61,6 +62,7 @@ async function handleSubmitAndAttackClick() {
     clearSelection(); // clear the selected words before attck
     await applyPlayerAttackAnimation();
     await applyEnemeyAttackAnimation();
+    endGame();
 }
 
 onMounted(async () => {
@@ -70,6 +72,7 @@ onMounted(async () => {
 </script>
 
 <template>
+    <Modal></Modal>
     <div class="min-h-screen bg-[#0C0F1A] flex flex-col">
         <section
             class="bg-[url('/public/images/dungeon-v2.png')] bg-center bg-no-repeat bg-[size:110%]"
