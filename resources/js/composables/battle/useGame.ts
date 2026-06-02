@@ -14,6 +14,9 @@ export function useGame() {
         score,
 
         isGameOver,
+
+        playerHealth,
+        enemyHealth,
     } = useGameStates();
 
     const { getSeedWords, weightedLetter } = useWords();
@@ -27,8 +30,14 @@ export function useGame() {
         selected.value = [];
         wordUsed.value = new Set();
         grid.value = [];
+
+        playerHealth.value = 5;
+        enemyHealth.value = 5;
     };
 
+    /**
+     * Description: Init also resets the game
+     * */
     const initGame = () => {
         resetGame();
         const seeds = getSeedWords(6);

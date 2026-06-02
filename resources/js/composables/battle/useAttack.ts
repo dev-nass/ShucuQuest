@@ -77,7 +77,7 @@ export function useAttack() {
     };
 
     /**
-     * Description: Ensure that after submitting the states for attacking will be reset
+     * Description: Ensure that after submitting, the states for attacking will be reset
      *              and also used for "New Game" buttton
      */
     const clearSelection = (): void => {

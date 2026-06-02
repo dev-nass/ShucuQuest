@@ -24,6 +24,7 @@ const {
     playerHealth,
     enemyHealth,
     isValidToAttack,
+    isGameOver,
 } = useGameStates();
 
 const { fetchData } = useFetchWords();
@@ -65,6 +66,10 @@ async function handleSubmitAndAttackClick() {
     endGame();
 }
 
+function handleResetClick() {
+    initGame();
+}
+
 onMounted(async () => {
     await fetchData();
     initGame();
@@ -72,7 +77,7 @@ onMounted(async () => {
 </script>
 
 <template>
-    <Modal />
+    <Modal :open="isGameOver" @close="handleResetClick" />
     <div class="min-h-screen bg-[#0C0F1A] flex flex-col">
         <section
             class="bg-[url('/public/images/dungeon-v2.png')] bg-center bg-no-repeat bg-[size:110%]"
@@ -192,9 +197,9 @@ onMounted(async () => {
                 <button
                     class="text-[#A855F7] text-sm tracking-widest px-6 py-3 font-pixel"
                     style="background-color: #0c0f1a; border: 1px solid #a855f7"
-                    @click="clearSelection"
+                    @click="handleResetClick()"
                 >
-                    NEW GAME
+                    RESET
                 </button>
             </div>
         </div>
