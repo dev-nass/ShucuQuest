@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 defineProps({
     open: {
         type: Boolean,
@@ -6,7 +6,12 @@ defineProps({
     },
 });
 
-defineEmits(["close", "confirm"]);
+// So close: [] means the close event fires with zero parameters.
+// If it passed a value, you'd write close: [reason: string].
+defineEmits<{
+    close: [];
+    confirm: [];
+}>();
 </script>
 <template>
     <Teleport to="body">

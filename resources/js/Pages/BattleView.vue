@@ -72,7 +72,7 @@ onMounted(async () => {
 </script>
 
 <template>
-    <Modal></Modal>
+    <Modal />
     <div class="min-h-screen bg-[#0C0F1A] flex flex-col">
         <section
             class="bg-[url('/public/images/dungeon-v2.png')] bg-center bg-no-repeat bg-[size:110%]"
