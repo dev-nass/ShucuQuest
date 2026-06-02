@@ -6,7 +6,7 @@ const dictionary = ref(new Set<string>());
 // WORD STATES
 const grid = ref<any[]>([]); // the grid of shuffled letters where users can pick
 const selected = ref<number[]>([]); // holds the ID currently selected letters
-const currentWord = ref<string[]>([]); // current word being spelled
+const currentWord = ref<string[]>([]); // current word being spelled used on UI
 const wordUsed = ref(new Set<string>()); // words that are already used
 
 // DISPLAY STATES

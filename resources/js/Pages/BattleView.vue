@@ -58,13 +58,14 @@ function handleTileClick(id: number) {
  * Description: Submit the attack and apply the animations
  * */
 async function handleSubmitAndAttackClick() {
-    submitWord();
+    const attackValid = submitWord();
+    if (!attackValid) return;
     isPlayersTurn.value = false;
-
-    clearSelection(); // clear the selected words before attck
 
     await applyPlayerAttackAnimation();
     await applyEnemeyAttackAnimation();
+
+    clearSelection(); // clear the selected words before attck
     endGame();
     isPlayersTurn.value = true;
 }
@@ -155,6 +156,7 @@ onMounted(async () => {
 
                     <!-- Current Word: below characters on sm/md, absolutely centered on lg -->
                     <div
+                        v-if="isPlayersTurn"
                         class="flex justify-center mt-6 lg:mt-0 lg:absolute lg:left-1/2 lg:top-1/2 lg:-translate-x-1/2 lg:-translate-y-1/2"
                     >
                         <div class="grid grid-cols-6 gap-3">

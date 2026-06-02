@@ -6,6 +6,7 @@ export function useAttack() {
     // states
     const {
         dictionary,
+        currentWord,
         selected,
         wordUsed,
         grid,
@@ -53,32 +54,25 @@ export function useAttack() {
      * Description: Validate the currentWord and validate if
      * its playersTurn before the attack sequence
      * */
-    const submitWord = (): void => {
+    const submitWord = (): boolean => {
         const word = validateWord();
 
         if (word === null) {
-            return;
+            return false;
         }
 
         if (isPlayersTurn.value === false) {
-            return;
+            return false;
         }
 
         wordUsed.value.add(word);
         // TODO: Isolate this logic
-        const pts =
-            word.length <= 3
-                ? 1
-                : word.length <= 4
-                  ? 2
-                  : word.length <= 5
-                    ? 4
-                    : word.length * 2;
-        score.value += pts;
+        // replaces the all letters after an attack
         selected.value.forEach((id) => {
             grid.value[id].letter = weightedLetter();
         });
-        setStatus("+" + pts + " pts — " + word.toUpperCase() + "!", "ok");
+
+        return true;
     };
 
     /**
@@ -139,7 +133,28 @@ export function useAttack() {
     };
 
     const applyPlayerAttackDamage = (): void => {
-        enemyHealth.value -= 1;
+        const word = selected.value
+            .map((id) => grid.value[id].letter)
+            .join("")
+            .toLowerCase();
+
+        const pts =
+            word.length <= 3
+                ? 1
+                : word.length <= 4
+                  ? 2
+                  : word.length <= 5
+                    ? 4
+                    : word.length * 2;
+
+        console.log("Word", word.length);
+        console.log(enemyHealth.value);
+        console.log(pts);
+        enemyHealth.value -= pts;
+        console.log(enemyHealth.value);
+
+        score.value += pts;
+        setStatus("+" + pts + " pts — " + word.toUpperCase() + "!", "ok");
     };
 
     const applyEnemyAttackDamage = (): void => {
