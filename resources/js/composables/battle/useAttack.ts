@@ -161,7 +161,7 @@ export function useAttack() {
     };
 
     const applyEnemyAttackDamage = (): void => {
-        playerHealth.value -= 1;
+        playerHealth.value -= 3;
     };
 
     function wait(ms: number): Promise<void> {
