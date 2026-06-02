@@ -15,7 +15,7 @@ const status = ref<string>("");
 // GAME STATES
 const RANDOM_LETTERS_COUNT: number = 16;
 const score = ref<number>(0);
-const isValidToAttack = ref<boolean>(false); // state to be check before submitWord()
+const isPlayersTurn = ref<boolean>(true); // state to be check before submitWord()
 const isGameOver = computed<boolean>(
     () => playerHealth.value <= 0 || enemyHealth.value <= 0,
 );
@@ -45,7 +45,7 @@ export function useGameStates() {
 
         score,
 
-        isValidToAttack,
+        isPlayersTurn,
         isGameOver,
 
         // ANIMATION STATES

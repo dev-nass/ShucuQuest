@@ -63,6 +63,8 @@ export function useGame() {
     };
 
     /**
+     * Description: Everytime this fn is invoked it checks if it's game game or not
+     *
      * 1. Set status — "Victory!" or "Defeated!" to show in the UI (BattleView.vue:65)
      * 2. Trigger end-game animations — play a victory/defeat pose via knightClass / dragonClass
      * 3. Gate further input — toggle something (like isGameOver) so handleSubmitAndAttack

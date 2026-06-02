@@ -12,7 +12,7 @@ export function useAttack() {
 
         score,
 
-        isValidToAttack,
+        isPlayersTurn,
 
         knightClass,
         dragonClass,
@@ -50,7 +50,8 @@ export function useAttack() {
     };
 
     /**
-     * Description: Validate the currentWord before the attack sequence
+     * Description: Validate the currentWord and validate if
+     * its playersTurn before the attack sequence
      * */
     const submitWord = (): void => {
         const word = validateWord();
@@ -59,8 +60,12 @@ export function useAttack() {
             return;
         }
 
-        isValidToAttack.value = true;
+        if (isPlayersTurn.value === false) {
+            return;
+        }
+
         wordUsed.value.add(word);
+        // TODO: Isolate this logic
         const pts =
             word.length <= 3
                 ? 1
@@ -81,7 +86,6 @@ export function useAttack() {
      *              and also used for "New Game" buttton
      */
     const clearSelection = (): void => {
-        isValidToAttack.value = false;
         selected.value = [];
         updateWordDisplay();
     };

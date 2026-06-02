@@ -2,6 +2,7 @@
 defineProps<{
     selected?: boolean;
     animationIntensity?: string;
+    disabled?: boolean;
 }>();
 </script>
 
@@ -13,12 +14,13 @@ defineProps<{
                 ? 'opacity-40 cursor-default border-[#3B0764]'
                 : 'cursor-pointer hover:bg-[#A855F7] hover:border-[#0D1526]',
             !selected && animationIntensity,
+            { 'pointer-events-none opacity-30 cursor-not-allowed': disabled },
         ]"
     >
         <span
             class="text-4xl font-pixel"
             :class="
-                selected
+                selected || disabled
                     ? 'text-[#3B0764]'
                     : 'text-[#A855F7] group-hover:text-[#0D1526]'
             "

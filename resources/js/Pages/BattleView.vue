@@ -23,7 +23,7 @@ const {
     currentWordAnimation,
     playerHealth,
     enemyHealth,
-    isValidToAttack,
+    isPlayersTurn,
     isGameOver,
 } = useGameStates();
 
@@ -48,6 +48,7 @@ function handleGridSquareClick(index: number) {
 }
 
 function handleTileClick(id: number) {
+    if (!isPlayersTurn.value) return;
     toggleTile(id);
     updateWordDisplay();
     animateCurrentSelectedWord();
@@ -58,12 +59,14 @@ function handleTileClick(id: number) {
  * */
 async function handleSubmitAndAttackClick() {
     submitWord();
-    if (!isValidToAttack.value) return;
+    isPlayersTurn.value = false;
 
     clearSelection(); // clear the selected words before attck
+
     await applyPlayerAttackAnimation();
     await applyEnemeyAttackAnimation();
     endGame();
+    isPlayersTurn.value = true;
 }
 
 function handleResetClick() {
@@ -176,6 +179,7 @@ onMounted(async () => {
                     v-for="g in grid"
                     :key="g.id"
                     :selected="selected.includes(g.id)"
+                    :disabled="isPlayersTurn === false"
                     @click="handleTileClick(g.id)"
                 >
                     {{ g.letter }}
