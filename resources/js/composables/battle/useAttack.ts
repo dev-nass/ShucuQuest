@@ -160,6 +160,7 @@ export function useAttack() {
         setStatus("+" + pts + " pts — " + word.toUpperCase() + "!", "ok");
     };
 
+    // TODO: create a logic here, where a crit chance is present
     const applyEnemyAttackDamage = (): void => {
         playerHealth.value -= 3;
     };
