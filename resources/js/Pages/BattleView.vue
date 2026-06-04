@@ -2,6 +2,9 @@
 import GridSquare from "@/Components/GridSquare.vue";
 import Modal from "@/Components/Modal.vue";
 import PixelHearts from "@/Components/PixelHearts.vue";
+import Button from "@/Components/Button.vue";
+import { Skull } from "@lucide/vue";
+
 import { useAnimation } from "@/composables/battle/useAnimation";
 import { useAttack } from "@/composables/battle/useAttack";
 import { useDisplay } from "@/composables/battle/useDisplay";
@@ -10,6 +13,7 @@ import { useGame } from "@/composables/battle/useGame";
 import { useWords } from "@/composables/battle/useWords";
 import { useGameStates } from "@/stores/useGameStates";
 import { onMounted, ref, watch } from "vue";
+import { router } from "@inertiajs/vue3";
 
 const {
     status,
@@ -75,6 +79,10 @@ function handleResetClick() {
     updateWordDisplay();
 }
 
+function handleGoBack() {
+    router.visit("/");
+}
+
 onMounted(async () => {
     await fetchData();
     initGame();
@@ -82,9 +90,18 @@ onMounted(async () => {
 </script>
 
 <template>
-    <Modal :open="isGameOver" @close="handleResetClick">
+    <!-- Game Over modal -->
+    <Modal :open="isGameOver">
+        <template #icon>
+            <Skull class="text-yellow-500" />
+        </template>
         <template #header>{{ status }}</template>
+        <template #footer>
+            <Button @click="handleResetClick">Reset</Button>
+            <Button variant="ghost" @click="handleGoBack">Back</Button>
+        </template>
     </Modal>
+
     <div class="min-h-screen bg-[#0C0F1A] flex flex-col">
         <section
             class="bg-[url('/public/images/dungeon-v2.png')] bg-center bg-no-repeat bg-[size:110%]"

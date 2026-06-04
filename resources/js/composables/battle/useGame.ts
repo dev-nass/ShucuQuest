@@ -10,7 +10,6 @@ export function useGame() {
         status,
 
         selected,
-        currentWord,
         wordUsed,
         grid,
 

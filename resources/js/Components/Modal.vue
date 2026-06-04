@@ -61,21 +61,7 @@ defineEmits<{
                                 class="mx-auto flex size-12 shrink-0 items-center justify-center rounded-full sm:mx-0 sm:size-10"
                                 style="background-color: #e8404020"
                             >
-                                <svg
-                                    viewBox="0 0 24 24"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    stroke-width="1.5"
-                                    aria-hidden="true"
-                                    class="size-6"
-                                    style="color: #e84040"
-                                >
-                                    <path
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
-                                    />
-                                </svg>
+                                <slot name="icon" />
                             </div>
 
                             <!-- Text -->
@@ -103,39 +89,10 @@ defineEmits<{
 
                     <!-- Footer -->
                     <div
-                        class="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6"
+                        class="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6 gap-x-2"
                         style="background-color: #0c0f1a"
                     >
-                        <!-- Confirm -->
-                        <button
-                            type="button"
-                            class="inline-flex w-full justify-center rounded-md px-3 py-2 text-sm font-semibold sm:ml-3 sm:w-auto transition-opacity hover:opacity-80"
-                            style="
-                                background: linear-gradient(
-                                    to right,
-                                    #a855f7,
-                                    #f0a8fc
-                                );
-                                color: #0f172a;
-                            "
-                            @click="$emit('confirm')"
-                        >
-                            Deactivate
-                        </button>
-
-                        <!-- Cancel -->
-                        <button
-                            type="button"
-                            class="mt-3 inline-flex w-full justify-center rounded-md px-3 py-2 text-sm font-semibold sm:mt-0 sm:w-auto transition-colors hover:opacity-80"
-                            style="
-                                background-color: transparent;
-                                border: 1px solid #a855f7;
-                                color: #e9c8f5;
-                            "
-                            @click="$emit('close')"
-                        >
-                            Cancel
-                        </button>
+                        <slot name="footer" />
                     </div>
                 </div>
             </div>
