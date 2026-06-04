@@ -72,6 +72,7 @@ async function handleSubmitAndAttackClick() {
 
 function handleResetClick() {
     initGame();
+    updateWordDisplay();
 }
 
 onMounted(async () => {
