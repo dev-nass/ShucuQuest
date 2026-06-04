@@ -120,8 +120,16 @@ onMounted(async () => {
                                     <span
                                         class="text-[#A855F7] font-pixel text-sm"
                                     >
+                                        <!-- Players Character -->
                                         <img
+                                            v-if="playerHealth > 0"
                                             src="/public/images/knight.png"
+                                            alt="dragon"
+                                        />
+
+                                        <img
+                                            v-else
+                                            src="/public/images/grave.png"
                                             alt="dragon"
                                         />
                                     </span>
@@ -147,8 +155,16 @@ onMounted(async () => {
                                 class="w-40 h-40 sm:w-52 sm:h-52 lg:w-75 lg:h-75 flex items-center justify-center"
                             >
                                 <span class="text-[#A855F7] font-pixel text-sm">
+                                    <!-- Enemey Character -->
                                     <img
+                                        v-if="enemyHealth > 0"
                                         src="/public/images/dragon.png"
+                                        alt="dragon"
+                                    />
+
+                                    <img
+                                        v-else
+                                        src="/public/images/grave.png"
                                         alt="dragon"
                                     />
                                 </span>
