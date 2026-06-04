@@ -111,7 +111,7 @@ onMounted(async () => {
                         <!-- Left Character -->
                         <div
                             :class="knightClass"
-                            class="lg:flex-1 lg:flex lg:justify-start lg:pl-8"
+                            class="knight-idle lg:flex lg:justify-start lg:pl-8"
                         >
                             <div
                                 class="w-40 h-40 sm:w-52 sm:h-52 lg:w-75 lg:h-75 flex items-center justify-center"
@@ -149,7 +149,7 @@ onMounted(async () => {
                         <!-- Right Character -->
                         <div
                             :class="dragonClass"
-                            class="lg:flex-1 lg:flex lg:justify-end lg:pr-8"
+                            class="dragon-idle lg:flex-1 lg:flex lg:justify-end lg:pr-8"
                         >
                             <div
                                 class="w-40 h-40 sm:w-52 sm:h-52 lg:w-75 lg:h-75 flex items-center justify-center"
@@ -229,3 +229,45 @@ onMounted(async () => {
         </div>
     </div>
 </template>
+
+<style scoped>
+@keyframes pixel-bob-knight {
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+    25% {
+        transform: translateY(-6px);
+    }
+    50% {
+        transform: translateY(-6px);
+    }
+    75% {
+        transform: translateY(0px);
+    }
+}
+
+@keyframes pixel-bob-dragon {
+    0%,
+    100% {
+        transform: translateY(0px);
+    }
+    25% {
+        transform: translateY(-6px);
+    }
+    50% {
+        transform: translateY(-6px);
+    }
+    75% {
+        transform: translateY(0px);
+    }
+}
+
+.knight-idle img {
+    animation: pixel-bob-knight 1.2s steps(1, end) infinite;
+}
+
+.dragon-idle img {
+    animation: pixel-bob-dragon 1.2s steps(1, end) infinite 0.4s;
+}
+</style>
