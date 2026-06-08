@@ -97,8 +97,8 @@ onMounted(async () => {
         </template>
         <template #header>{{ status }}</template>
         <template #footer>
-            <Button @click="handleResetClick">Reset</Button>
-            <Button variant="ghost" @click="handleGoBack">Back</Button>
+            <Button @click="handleResetClick">Reset Game</Button>
+            <Button variant="ghost" @click="handleGoBack">Back to Home</Button>
         </template>
     </Modal>
 
