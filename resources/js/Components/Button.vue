@@ -18,6 +18,11 @@ withDefaults(defineProps<Props>(), {
     fullWidth: false,
 });
 
+// Record<ButtonSize, string> means an object that MUST have
+// exactly these four keys, each mapping to a string
+// Use Record<Key, Value> as a lookup table/dictionary
+// Like this instance, where we retrieve a specific design;
+// based on the based size
 const sizeClasses: Record<ButtonSize, string> = {
     sm: "px-3 py-1.5 text-xs",
     md: "px-3.5 py-2 text-sm",
