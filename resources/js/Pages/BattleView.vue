@@ -211,38 +211,168 @@ onMounted(async () => {
         </section>
 
         <!-- Bottom Section: Grid + Buttons -->
-        <div class="flex flex-col items-center gap-6">
-            <div class="grid grid-cols-4 gap-3">
-                <GridSquare
-                    v-for="g in grid"
-                    :key="g.id"
-                    :selected="selected.includes(g.id)"
-                    :disabled="isPlayersTurn === false"
-                    @click="handleTileClick(g.id)"
-                >
-                    {{ g.letter }}
-                </GridSquare>
-            </div>
-            <div class="flex gap-4">
-                <button
-                    class="text-[ #0F172A] text-sm font-bold tracking-widest px-6 py-3 font-pixel"
+        <div class="grid grid-cols-3 gap-4 items-stretch justify-center">
+            <!-- LEFT COLUMN: Potions (top, shorter row) + Equipment (bottom, larger row) -->
+            <div class="flex flex-col gap-3 w-full h-90">
+                <!-- Potions row (shorter height) -->
+                <div
+                    class="flex items-center justify-center gap-2 p-2 rounded"
                     style="
-                        background: linear-gradient(to right, #a855f7, #f0a8fc);
-                        box-shadow:
-                            0 0 16px #a855f7,
-                            0 0 10px #f0a8fc;
+                        background-color: #0d1526;
+                        border: 1px solid #a855f7;
+                        height: 80px;
                     "
-                    @click="handleSubmitAndAttackClick()"
                 >
-                    ATTACK
-                </button>
-                <button
-                    class="text-[#A855F7] text-sm tracking-widest px-6 py-3 font-pixel"
-                    style="background-color: #0c0f1a; border: 1px solid #a855f7"
-                    @click="handleResetClick()"
+                    <!-- Placeholder potion slots -->
+                    <div
+                        v-for="n in 3"
+                        :key="`potion-${n}`"
+                        class="flex items-center justify-center rounded"
+                        style="
+                            width: 48px;
+                            height: 48px;
+                            background-color: #3b0764;
+                            border: 1px solid #2dd4bf;
+                        "
+                    >
+                        <span class="text-xs font-pixel" style="color: #99f6e4"
+                            >P{{ n }}</span
+                        >
+                    </div>
+                </div>
+
+                <!-- Equipment row (taller, placeholder images) -->
+                <div
+                    class="grid grid-cols-3 gap-2 p-2 rounded flex-1"
+                    style="background-color: #0d1526; border: 1px solid #a855f7"
                 >
-                    RESET
-                </button>
+                    <div
+                        v-for="n in 3"
+                        :key="`equip-${n}`"
+                        class="flex items-center justify-center rounded"
+                        style="
+                            aspect-ratio: 1 / 1;
+                            background-color: #0c0f1a;
+                            border: 1px solid #6d28d9;
+                        "
+                    >
+                        <img
+                            src="https://via.placeholder.com/64"
+                            alt="equipment placeholder"
+                            class="w-3/4 h-3/4 object-contain"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <!-- MIDDLE COLUMN: Scrambled words grid + action buttons -->
+            <div
+                class="flex flex-col items-center justify-center gap-6 w-full h-full"
+            >
+                <div class="grid grid-cols-4 gap-3">
+                    <GridSquare
+                        v-for="g in grid"
+                        :key="g.id"
+                        :selected="selected.includes(g.id)"
+                        :disabled="isPlayersTurn === false"
+                        @click="handleTileClick(g.id)"
+                    >
+                        {{ g.letter }}
+                    </GridSquare>
+                </div>
+                <div class="flex gap-4">
+                    <button
+                        class="text-[ #0F172A] text-sm font-bold tracking-widest px-6 py-3 font-pixel"
+                        style="
+                            background: linear-gradient(
+                                to right,
+                                #a855f7,
+                                #f0a8fc
+                            );
+                            box-shadow:
+                                0 0 16px #a855f7,
+                                0 0 10px #f0a8fc;
+                        "
+                        @click="handleSubmitAndAttackClick()"
+                    >
+                        ATTACK
+                    </button>
+                    <button
+                        class="text-[#A855F7] text-sm tracking-widest px-6 py-3 font-pixel"
+                        style="
+                            background-color: #0c0f1a;
+                            border: 1px solid #a855f7;
+                        "
+                        @click="handleResetClick()"
+                    >
+                        RESET
+                    </button>
+                </div>
+            </div>
+
+            <!-- RIGHT COLUMN: Enemy attack desc + Enemy passive desc + Enemy detail summary -->
+            <div class="flex flex-col gap-3 w-full h-90">
+                <!-- Enemy attack description (short row) -->
+                <div
+                    class="p-2 rounded"
+                    style="background-color: #0d1526; border: 1px solid #a855f7"
+                >
+                    <p
+                        class="text-xs font-bold font-pixel"
+                        style="color: #f0abfc"
+                    >
+                        ATTACK
+                    </p>
+                    <p class="text-xs font-pixel" style="color: #e9c8f5">
+                        Deals heavy damage to a single target.
+                    </p>
+                </div>
+
+                <!-- Enemy passive skill description (short row) -->
+                <div
+                    class="p-2 rounded"
+                    style="background-color: #0d1526; border: 1px solid #a855f7"
+                >
+                    <p
+                        class="text-xs font-bold font-pixel"
+                        style="color: #2dd4bf"
+                    >
+                        PASSIVE
+                    </p>
+                    <p class="text-xs font-pixel" style="color: #e9c8f5">
+                        Regenerates a small amount of HP each turn.
+                    </p>
+                </div>
+
+                <!-- Enemy detail summary (largest row) -->
+                <div
+                    class="p-3 rounded flex-1"
+                    style="
+                        background-color: #0d1526;
+                        border: 1px solid #a855f7;
+                        min-height: 180px;
+                    "
+                >
+                    <p
+                        class="text-sm font-bold font-pixel mb-2"
+                        style="color: #a855f7"
+                    >
+                        ENEMY
+                    </p>
+                    <p class="text-xs font-pixel mb-1" style="color: #f3e8ff">
+                        Name: Goblin Brute
+                    </p>
+                    <p class="text-xs font-pixel mb-1" style="color: #f3e8ff">
+                        Type: Melee
+                    </p>
+                    <p class="text-xs font-pixel mb-1" style="color: #f3e8ff">
+                        Level: 5
+                    </p>
+                    <p class="text-xs font-pixel" style="color: #f3e8ff">
+                        A hulking brute that hits hard but moves slowly.
+                        Vulnerable to ranged attacks.
+                    </p>
+                </div>
             </div>
         </div>
     </div>
