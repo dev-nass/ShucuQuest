@@ -323,7 +323,7 @@ onMounted(async () => {
                     >
                         ATTACK
                     </p>
-                    <p class="text-xs font-pixel" style="color: #e9c8f5">
+                    <p class="text-lg font-pixel" style="color: #e9c8f5">
                         Deals heavy damage to a single target.
                     </p>
                 </div>
@@ -339,7 +339,7 @@ onMounted(async () => {
                     >
                         PASSIVE
                     </p>
-                    <p class="text-xs font-pixel" style="color: #e9c8f5">
+                    <p class="text-lg font-pixel" style="color: #e9c8f5">
                         Regenerates a small amount of HP each turn.
                     </p>
                 </div>
@@ -359,16 +359,16 @@ onMounted(async () => {
                     >
                         ENEMY
                     </p>
-                    <p class="text-xs font-pixel mb-1" style="color: #f3e8ff">
-                        Name: Goblin Brute
+                    <p class="font-pixel mb-1" style="color: #f3e8ff">
+                        Name: Dragon Brute
                     </p>
-                    <p class="text-xs font-pixel mb-1" style="color: #f3e8ff">
+                    <p class="font-pixel mb-1" style="color: #f3e8ff">
                         Type: Melee
                     </p>
-                    <p class="text-xs font-pixel mb-1" style="color: #f3e8ff">
+                    <p class="font-pixel mb-1" style="color: #f3e8ff">
                         Level: 5
                     </p>
-                    <p class="text-xs font-pixel" style="color: #f3e8ff">
+                    <p class="font-pixel" style="color: #f3e8ff">
                         A hulking brute that hits hard but moves slowly.
                         Vulnerable to ranged attacks.
                     </p>
