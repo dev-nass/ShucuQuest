@@ -216,11 +216,11 @@ onMounted(async () => {
             <div class="flex flex-col gap-3 w-full h-90">
                 <!-- Potions row (shorter height) -->
                 <div
-                    class="flex items-center justify-center gap-2 p-2 rounded"
+                    class="flex items-center justify-center gap-6 p-2 rounded"
                     style="
                         background-color: #0d1526;
                         border: 1px solid #a855f7;
-                        height: 80px;
+                        height: 120px;
                     "
                 >
                     <!-- Placeholder potion slots -->
@@ -229,15 +229,15 @@ onMounted(async () => {
                         :key="`potion-${n}`"
                         class="flex items-center justify-center rounded"
                         style="
-                            width: 48px;
-                            height: 48px;
+                            width: 115px;
                             background-color: #3b0764;
                             border: 1px solid #2dd4bf;
                         "
                     >
-                        <span class="text-xs font-pixel" style="color: #99f6e4"
-                            >P{{ n }}</span
-                        >
+                        <img
+                            src="/public/images/potion.gif"
+                            alt="potion-imgs"
+                        />
                     </div>
                 </div>
 
@@ -249,18 +249,29 @@ onMounted(async () => {
                     <div
                         v-for="n in 3"
                         :key="`equip-${n}`"
-                        class="flex items-center justify-center rounded"
+                        class="flex flex-col items-center justify-center gap-1 rounded h-full p-1"
                         style="
-                            aspect-ratio: 1 / 1;
                             background-color: #0c0f1a;
                             border: 1px solid #6d28d9;
                         "
                     >
                         <img
-                            src="https://via.placeholder.com/64"
+                            src="/public/images/sword.png"
                             alt="equipment placeholder"
-                            class="w-3/4 h-3/4 object-contain"
+                            class="w-3/4 object-contain"
                         />
+                        <p
+                            class="text-xs font-bold font-pixel text-center leading-tight"
+                            style="color: #f3e8ff"
+                        >
+                            Sword of Justice
+                        </p>
+                        <p
+                            class="text-[10px] font-pixel text-center"
+                            style="color: #2dd4bf"
+                        >
+                            (Sword)
+                        </p>
                     </div>
                 </div>
             </div>
