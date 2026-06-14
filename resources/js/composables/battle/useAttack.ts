@@ -162,7 +162,9 @@ export function useAttack() {
         setStatus("+" + pts + " pts — " + word.toUpperCase() + "!", "ok");
     };
 
-    // TODO: create a logic here, where a crit chance is present
+    // TODO: Make this fn accept param that then uses use/case
+    // that use casa will pull the proper enemy entity attack
+    // roleDragonAttack, roleSlimeAttack
     const applyEnemyAttackDamage = (): void => {
         const dragonDmg = roleDragonAttack();
 
