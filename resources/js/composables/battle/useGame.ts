@@ -33,7 +33,7 @@ export function useGame() {
         wordUsed.value = new Set();
         grid.value = [];
 
-        playerHealth.value = 0.5;
+        playerHealth.value = 5;
         enemyHealth.value = 5;
     };
 

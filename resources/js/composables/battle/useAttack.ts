@@ -1,6 +1,7 @@
 import { useGameStates } from "@/stores/useGameStates";
 import { useDisplay } from "./useDisplay";
 import { useWords } from "./useWords";
+import { useDragonAttack } from "../entities/dragon/useDragonAttack";
 
 export function useAttack() {
     // states
@@ -28,6 +29,7 @@ export function useAttack() {
     // composables
     const { setStatus, updateWordDisplay } = useDisplay();
     const { weightedLetter } = useWords();
+    const { roleDragonAttack } = useDragonAttack();
 
     const validateWord = (): string | null => {
         const word = selected.value
@@ -162,7 +164,9 @@ export function useAttack() {
 
     // TODO: create a logic here, where a crit chance is present
     const applyEnemyAttackDamage = (): void => {
-        playerHealth.value -= 3;
+        const dragonDmg = roleDragonAttack();
+
+        playerHealth.value -= dragonDmg;
     };
 
     function wait(ms: number): Promise<void> {
