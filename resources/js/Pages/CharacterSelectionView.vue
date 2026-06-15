@@ -248,76 +248,13 @@ const emit = defineEmits<{
                         :alt="`${char.name} sprite`"
                     />
 
-                    <!-- Rogue sprite -->
-                    <svg
+                    <img
                         v-if="char.id === 'rogue'"
-                        class="w-32 h-32 relative z-10"
-                        viewBox="0 0 16 16"
-                        xmlns="http://www.w3.org/2000/svg"
+                        src="/public/images/rogue.png"
+                        class="relative z-10 h-48 w-auto object-contain"
                         style="image-rendering: pixelated"
-                    >
-                        <rect x="5" y="1" width="6" height="5" fill="#3B0764" />
-                        <rect x="6" y="2" width="4" height="3" fill="#E9C8F5" />
-                        <rect x="6" y="3" width="1" height="1" fill="#0C0F1A" />
-                        <rect x="9" y="3" width="1" height="1" fill="#0C0F1A" />
-                        <rect x="4" y="1" width="2" height="2" fill="#0C0F1A" />
-                        <rect x="5" y="5" width="6" height="7" fill="#1a0a2e" />
-                        <rect x="5" y="5" width="6" height="1" fill="#3B0764" />
-                        <rect x="3" y="6" width="2" height="5" fill="#1a0a2e" />
-                        <rect
-                            x="11"
-                            y="6"
-                            width="2"
-                            height="5"
-                            fill="#1a0a2e"
-                        />
-                        <rect x="2" y="5" width="1" height="4" fill="#A855F7" />
-                        <rect
-                            x="13"
-                            y="5"
-                            width="1"
-                            height="4"
-                            fill="#A855F7"
-                        />
-                        <rect
-                            x="5"
-                            y="12"
-                            width="2"
-                            height="3"
-                            fill="#1a0a2e"
-                        />
-                        <rect
-                            x="9"
-                            y="12"
-                            width="2"
-                            height="3"
-                            fill="#1a0a2e"
-                        />
-                        <rect
-                            x="7"
-                            y="7"
-                            width="2"
-                            height="2"
-                            fill="#A855F7"
-                            opacity="0.4"
-                        />
-                        <rect
-                            x="6"
-                            y="9"
-                            width="1"
-                            height="1"
-                            fill="#2DD4BF"
-                            opacity="0.7"
-                        />
-                        <rect
-                            x="9"
-                            y="9"
-                            width="1"
-                            height="1"
-                            fill="#2DD4BF"
-                            opacity="0.7"
-                        />
-                    </svg>
+                        :alt="`${char.name} sprite`"
+                    />
                 </div>
 
                 <!-- Card body -->
