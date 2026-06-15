@@ -31,6 +31,9 @@ const currentWordAnimation = ref<string>();
 const playerHealth = ref<number>(1.5);
 const enemyHealth = ref<number>(0.5);
 
+// SELECTED CHARACTER STATE
+const selectedChar = ref<string>("mage"); // small letter
+
 export function useGameStates() {
     return {
         RANDOM_LETTERS_COUNT,
@@ -58,5 +61,8 @@ export function useGameStates() {
         // HP STATES
         playerHealth,
         enemyHealth,
+
+        // SELECTED CHARACTER
+        selectedChar,
     };
 }

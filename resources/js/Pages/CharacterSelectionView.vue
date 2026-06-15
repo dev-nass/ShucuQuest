@@ -13,6 +13,7 @@ interface Character {
     stats: CharacterStat[];
 }
 
+// TODO: Update this and make dynamic from DB
 const characters: Character[] = [
     {
         id: "knight",

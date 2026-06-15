@@ -12,7 +12,7 @@ import { useFetchWords } from "@/composables/battle/useFetchWords";
 import { useGame } from "@/composables/battle/useGame";
 import { useWords } from "@/composables/battle/useWords";
 import { useGameStates } from "@/stores/useGameStates";
-import { onMounted, ref, watch } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import { router } from "@inertiajs/vue3";
 
 const {
@@ -29,6 +29,7 @@ const {
     enemyHealth,
     isPlayersTurn,
     isGameOver,
+    selectedChar,
 } = useGameStates();
 
 const { fetchData } = useFetchWords();
@@ -79,9 +80,25 @@ function handleResetClick() {
     updateWordDisplay();
 }
 
+// helper function
+
 function handleGoBack() {
     router.visit("/");
 }
+
+// character selection
+type Characters = "knight" | "mage" | "rogue";
+const loadCharacterSprite: Record<Characters, string> = {
+    knight: "/images/knight.png",
+    mage: "/images/mage.png",
+    rogue: "/images/rogue.png",
+};
+
+const characterSpriteSrc = computed(
+    () =>
+        loadCharacterSprite[selectedChar.value as Characters] ??
+        "/public/images/knight.png",
+);
 
 onMounted(async () => {
     await fetchData();
@@ -141,7 +158,7 @@ onMounted(async () => {
                                         <!-- Players Character -->
                                         <img
                                             v-if="playerHealth > 0"
-                                            src="/public/images/knight.png"
+                                            :src="characterSpriteSrc"
                                             alt="dragon"
                                         />
 
