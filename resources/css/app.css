@@ -15,6 +15,11 @@
         "Noto Color Emoji";
 }
 
+:root,
+* {
+    -webkit-user-drag: none;
+}
+
 body {
     overflow-x: hidden;
 }
