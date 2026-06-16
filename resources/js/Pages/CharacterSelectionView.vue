@@ -1,5 +1,10 @@
 <script setup lang="ts">
+import { useGameStates } from "@/stores/useGameStates";
+
+import { router } from "@inertiajs/vue3";
 import { ref } from "vue";
+
+const { selectedChar } = useGameStates();
 
 interface CharacterStat {
     label: string;
@@ -61,6 +66,8 @@ function confirmSelection() {
     const char = characters.find((c) => c.id === selectedId.value);
     if (char) {
         emit("confirm", char);
+        selectedChar.value = selectedId.value;
+        router.visit("/battle");
     }
 }
 

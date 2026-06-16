@@ -32,7 +32,7 @@ const playerHealth = ref<number>(1.5);
 const enemyHealth = ref<number>(0.5);
 
 // SELECTED CHARACTER STATE
-const selectedChar = ref<string>("mage"); // small letter
+const selectedChar = ref<string | null>("rogue"); // small letter
 
 export function useGameStates() {
     return {
