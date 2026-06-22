@@ -21,9 +21,10 @@ const isGameOver = computed<boolean>(
 );
 
 // ANIMATION STATES (UI)
-const knightClass = ref<string>();
+const playerCharacterClass = ref<string>();
 const dragonClass = ref<string>();
-const fireballVisible = ref<boolean>(false);
+const playerFireballVisible = ref<boolean>(true);
+const enemyFireballVisible = ref<boolean>(false);
 const fireballClass = ref<string>();
 const currentWordAnimation = ref<string>();
 
@@ -32,7 +33,7 @@ const playerHealth = ref<number>(1.5);
 const enemyHealth = ref<number>(0.5);
 
 // SELECTED CHARACTER STATE
-const selectedChar = ref<string | null>("rogue"); // small letter
+const selectedChar = ref<string | null>("mage"); // small letter
 
 export function useGameStates() {
     return {
@@ -52,9 +53,10 @@ export function useGameStates() {
         isGameOver,
 
         // ANIMATION STATES
-        knightClass,
+        playerCharacterClass,
         dragonClass,
-        fireballVisible,
+        playerFireballVisible,
+        enemyFireballVisible,
         fireballClass,
         currentWordAnimation,
 

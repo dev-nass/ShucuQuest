@@ -1,0 +1,184 @@
+/*
+ * WIZARD HIT EFFECTS
+ */
+
+/* Wizard recoil on hit — mirrors dragon, recoils RIGHT */
+@keyframes mage-hit {
+    0% {
+        transform: translateX(0) rotate(0deg) scaleX(1);
+        filter: brightness(1);
+    }
+    10% {
+        transform: translateX(20px) rotate(5deg) scaleX(0.92);
+        filter: brightness(3) hue-rotate(200deg);
+    }
+    25% {
+        transform: translateX(30px) rotate(8deg) scaleX(0.95);
+        filter: brightness(1.5) sepia(0.6);
+    }
+    40% {
+        transform: translateX(10px) rotate(-4deg) scaleX(1.04);
+        filter: brightness(1);
+    }
+    55% {
+        transform: translateX(20px) rotate(3deg) scaleX(0.97);
+    }
+    70% {
+        transform: translateX(8px) rotate(-2deg) scaleX(1.02);
+    }
+    85% {
+        transform: translateX(4px) rotate(1deg);
+    }
+    100% {
+        transform: translateX(0) rotate(0deg) scaleX(1);
+        filter: brightness(1);
+    }
+}
+
+/* Wizard red damage flash — same as dragon, direction-neutral */
+@keyframes mage-flash {
+    0% {
+        filter: brightness(1) sepia(0);
+    }
+    10% {
+        filter: brightness(2) sepia(1) saturate(5) hue-rotate(-30deg);
+    }
+    30% {
+        filter: brightness(1.3) sepia(0.5) saturate(3) hue-rotate(-20deg);
+    }
+    100% {
+        filter: brightness(1) sepia(0);
+    }
+}
+
+/*
+ * WIZARD ATTACK EFFECTS
+ */
+
+/* Wizard pre-attack shake — same rhythm as dragon */
+@keyframes mage-shake {
+    0% {
+        transform: translateX(0) rotate(0deg);
+    }
+    15% {
+        transform: translateX(-8px) rotate(-4deg);
+    }
+    30% {
+        transform: translateX(8px) rotate(4deg);
+    }
+    45% {
+        transform: translateX(-6px) rotate(-3deg);
+    }
+    60% {
+        transform: translateX(6px) rotate(3deg);
+    }
+    80% {
+        transform: translateX(-3px) rotate(-1.5deg);
+    }
+    100% {
+        transform: translateX(0) rotate(0deg);
+    }
+}
+
+/* Wizard charge — same color ramp as dragon, direction-neutral */
+@keyframes mage-charge {
+    0% {
+        filter: brightness(1) saturate(1);
+    }
+    30% {
+        filter: brightness(1.4) saturate(2) sepia(0.4) hue-rotate(-20deg);
+    }
+    70% {
+        filter: brightness(2) saturate(4) sepia(0.8) hue-rotate(-35deg);
+    }
+    100% {
+        filter: brightness(2.8) saturate(5) sepia(1) hue-rotate(-40deg);
+    }
+}
+
+/* Wizard fireball travels LEFT to RIGHT — positive X direction */
+@keyframes mage-fireball-travel {
+    0% {
+        transform: translateX(0) scaleX(1) scaleY(1);
+        opacity: 1;
+    }
+    20% {
+        transform: translateX(calc(var(--fireball-travel, 200px) * 0.1))
+            scaleX(1.4) scaleY(0.75);
+        opacity: 1;
+    }
+    55% {
+        transform: translateX(calc(var(--fireball-travel, 200px) * 0.6))
+            scaleX(1.6) scaleY(0.65);
+        opacity: 1;
+    }
+    80% {
+        transform: translateX(var(--fireball-travel, 200px)) scaleX(0.6)
+            scaleY(1.5);
+        opacity: 1;
+    }
+    88% {
+        transform: translateX(var(--fireball-travel, 200px)) scaleX(0.6)
+            scaleY(1.5);
+        opacity: 1;
+    }
+    95% {
+        transform: translateX(var(--fireball-travel, 200px)) scaleX(0)
+            scaleY(1.5);
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateX(var(--fireball-travel, 200px)) scaleX(0) scaleY(0);
+        opacity: 0;
+    }
+}
+
+/* Wizard fireball flicker — same as dragon, direction-neutral */
+@keyframes mage-fireball-flicker {
+    0% {
+        filter: brightness(1.2) saturate(1.5) hue-rotate(0deg);
+    }
+    25% {
+        filter: brightness(1.8) saturate(2.5) hue-rotate(-15deg);
+    }
+    50% {
+        filter: brightness(1.4) saturate(2) hue-rotate(10deg);
+    }
+    75% {
+        filter: brightness(2) saturate(3) hue-rotate(-10deg);
+    }
+    100% {
+        filter: brightness(1.2) saturate(1.5) hue-rotate(0deg);
+    }
+}
+
+/*
+ * UTILITY CLASSES
+ */
+
+/* Hit (After enemy attack) */
+.animate-mage-hit {
+    animation: mage-hit 0.6s ease-out forwards;
+}
+
+.animate-mage-flash {
+    animation: mage-flash 0.5s ease-out forwards;
+}
+
+/* Pre-Attack */
+.animate-mage-shake {
+    animation: mage-shake 0.5s ease-in-out forwards;
+}
+
+.animate-mage-charge {
+    animation: mage-charge 0.8s ease-in forwards;
+}
+
+/* Attack */
+.animate-mage-fireball-travel {
+    animation: mage-fireball-travel 0.7s ease-in forwards;
+}
+
+.animate-mage-fireball-flicker {
+    animation: mage-fireball-flicker 0.3s linear infinite;
+}

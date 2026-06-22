@@ -5,6 +5,10 @@ export function useAnimation() {
     const { validateWord } = useAttack();
     const { currentWordAnimation } = useGameStates();
 
+    /**
+     * Description: Animate the current selected word glow effect
+     *              based on its length
+     */
     const animateCurrentSelectedWord = () => {
         const word = validateWord();
 

@@ -15,9 +15,10 @@ export function useAttack() {
 
         isPlayersTurn,
 
-        knightClass,
+        playerCharacterClass,
         dragonClass,
-        fireballVisible,
+        playerFireballVisible,
+        enemyFireballVisible,
         fireballClass,
 
         playerHealth,
@@ -90,19 +91,50 @@ export function useAttack() {
     /**
      * Description: Apply the animation and reduce the health of player
      */
-    const applyPlayerAttackAnimation = async (): Promise<void> => {
+    const applyKnightAttackAnimation = async (): Promise<void> => {
         // 1. Knight shake (anticipation)
-        knightClass.value = "animate-knight-shake";
+        playerCharacterClass.value = "animate-knight-shake";
         await wait(300);
 
         // 2. Knight dashes + dragon gets hit simultaneously
-        knightClass.value = "animate-knight-attack";
+        playerCharacterClass.value = "animate-knight-attack";
         await wait(220); // delay hit to sync with slash impact
         dragonClass.value = "animate-dragon-hit";
 
         // 3. Clean up
         await wait(700);
-        knightClass.value = "";
+        playerCharacterClass.value = "";
+        dragonClass.value = "";
+
+        applyPlayerAttackDamage();
+    };
+
+    const applyMageAttackAnimation = async (): Promise<void> => {
+        // 1. Anticipation shake
+        playerCharacterClass.value = "animate-mage-shake";
+        await wait(500);
+
+        // 2. Charge wind-up
+        playerCharacterClass.value = "animate-mage-charge";
+        await wait(800);
+
+        // 3. Fireball appears and flickers while still in mage's hand
+        playerCharacterClass.value = "";
+        playerFireballVisible.value = true;
+        fireballClass.value = "animate-mage-fireball-flicker";
+        await wait(300);
+
+        // 4. Fireball launches
+        fireballClass.value = "animate-mage-fireball-travel";
+        await wait(500); // sync hit to landing impact
+
+        // 5. Dragon reacts, fireball disappears
+        dragonClass.value = "animate-dragon-hit";
+        fireballClass.value = "";
+        playerFireballVisible.value = false;
+
+        // 6. Cleanup
+        await wait(700);
         dragonClass.value = "";
 
         applyPlayerAttackDamage();
@@ -121,18 +153,18 @@ export function useAttack() {
 
         // 6. Fireball launched — show the fireball element and send it flying
         dragonClass.value = "";
-        fireballVisible.value = true;
+        enemyFireballVisible.value = true;
         fireballClass.value = "animate-fireball";
 
         // 7. Knight takes the hit — sync slightly before fireball lands
         await wait(360); // ~60% of fireball travel before impact registers
-        knightClass.value = "animate-knight-hit";
+        playerCharacterClass.value = "animate-knight-hit";
 
         // 8. Clean up everything once all animations settle
         await wait(750);
-        knightClass.value = "";
+        playerCharacterClass.value = "";
         fireballClass.value = "";
-        fireballVisible.value = false;
+        enemyFireballVisible.value = false;
 
         applyEnemyAttackDamage();
     };
@@ -180,7 +212,8 @@ export function useAttack() {
         submitWord,
         clearSelection,
 
-        applyPlayerAttackAnimation,
+        applyKnightAttackAnimation,
+        applyMageAttackAnimation,
         applyEnemyAttackAnimation,
     };
 }

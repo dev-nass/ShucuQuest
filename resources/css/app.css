@@ -9,6 +9,7 @@
 @source '../**/*.vue';
 
 @import "animations/characters/knight.css";
+@import "animations/characters/mage.css";
 @import "animations/enemies/dragon.css";
 
 @theme {

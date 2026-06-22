@@ -21,9 +21,10 @@ const {
     grid,
     selected,
     currentWord,
-    knightClass,
+    playerCharacterClass,
     dragonClass,
-    fireballVisible,
+    playerFireballVisible,
+    enemyFireballVisible,
     fireballClass,
     currentWordAnimation,
     playerHealth,
@@ -40,7 +41,8 @@ const { updateWordDisplay } = useDisplay();
 const {
     clearSelection,
     submitWord,
-    applyPlayerAttackAnimation,
+    applyKnightAttackAnimation,
+    applyMageAttackAnimation,
     applyEnemyAttackAnimation,
 } = useAttack();
 const { animateCurrentSelectedWord } = useAnimation();
@@ -69,7 +71,9 @@ async function handleSubmitAndAttackClick() {
     if (!attackValid || isGameOver.value) return;
     isPlayersTurn.value = false;
 
-    await applyPlayerAttackAnimation();
+    if (selectedChar.value === "knight") await applyKnightAttackAnimation();
+    else if (selectedChar.value === "mage") await applyMageAttackAnimation();
+
     await applyEnemyAttackAnimation();
 
     clearSelection(); // this clear the selected words before attck
@@ -145,10 +149,20 @@ onMounted(async () => {
                 >
                     <!-- Characters row (sm/md) | pushed to edges (lg) -->
                     <div class="flex justify-between lg:contents">
+                        <!-- Mage fireball: starts left side, travels right toward enemy -->
+                        <img
+                            v-if="playerFireballVisible"
+                            :class="fireballClass"
+                            src="/public/images/fireball-mirrored.png"
+                            alt="fireball"
+                            class="absolute left-[15%] top-1/2 -translate-y-1/2 h-50 pointer-events-none"
+                            style="--fireball-travel: 60vw"
+                        />
+
                         <!-- Left Character -->
                         <div
-                            :class="knightClass"
-                            class="knight-idle lg:flex lg:justify-start lg:pl-8"
+                            :class="playerCharacterClass"
+                            class="player-idle lg:flex lg:justify-start lg:pl-8"
                         >
                             <div
                                 class="w-40 h-40 sm:w-52 sm:h-52 lg:w-75 lg:h-75 flex items-center justify-center"
@@ -157,11 +171,11 @@ onMounted(async () => {
                                     <span
                                         class="text-[#A855F7] font-pixel text-sm"
                                     >
-                                        <!-- Players Character -->
+                                        <!-- Player Character -->
                                         <img
                                             v-if="playerHealth > 0"
                                             :src="characterSpriteSrc"
-                                            alt="dragon"
+                                            alt="player-character"
                                         />
 
                                         <img
@@ -175,7 +189,7 @@ onMounted(async () => {
                         </div>
 
                         <img
-                            v-if="fireballVisible"
+                            v-if="enemyFireballVisible"
                             :class="fireballClass"
                             src="/public/images/fireball.png"
                             alt="fireball"
@@ -192,7 +206,7 @@ onMounted(async () => {
                                 class="w-40 h-40 sm:w-52 sm:h-52 lg:w-75 lg:h-75 flex items-center justify-center"
                             >
                                 <span class="text-[#A855F7] font-pixel text-sm">
-                                    <!-- Enemey Character -->
+                                    <!-- Enemy Character -->
                                     <img
                                         v-if="enemyHealth > 0"
                                         src="/public/images/dragon.png"
@@ -411,7 +425,7 @@ onMounted(async () => {
 </template>
 
 <style scoped>
-@keyframes pixel-bob-knight {
+@keyframes pixel-bob-player {
     0%,
     100% {
         transform: translateY(0px);
@@ -443,8 +457,8 @@ onMounted(async () => {
     }
 }
 
-.knight-idle img {
-    animation: pixel-bob-knight 1.2s steps(1, end) infinite;
+.player-idle img {
+    animation: pixel-bob-player 1.2s steps(1, end) infinite;
 }
 
 .dragon-idle img {
