@@ -23,7 +23,7 @@ const isGameOver = computed<boolean>(
 // ANIMATION STATES (UI)
 const playerCharacterClass = ref<string>();
 const dragonClass = ref<string>();
-const playerFireballVisible = ref<boolean>(true);
+const playerFireballVisible = ref<boolean>(false); // used when selected char is mage
 const enemyFireballVisible = ref<boolean>(false);
 const fireballClass = ref<string>();
 const currentWordAnimation = ref<string>();

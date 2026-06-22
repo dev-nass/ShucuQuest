@@ -149,7 +149,7 @@ onMounted(async () => {
                 >
                     <!-- Characters row (sm/md) | pushed to edges (lg) -->
                     <div class="flex justify-between lg:contents">
-                        <!-- Mage fireball: starts left side, travels right toward enemy -->
+                        <!-- Mage fireball (player side → travels right) -->
                         <img
                             v-if="playerFireballVisible"
                             :class="fireballClass"
@@ -188,6 +188,7 @@ onMounted(async () => {
                             </div>
                         </div>
 
+                        <!-- Dragon fireball (enemy side → travels left) -->
                         <img
                             v-if="enemyFireballVisible"
                             :class="fireballClass"
@@ -461,7 +462,18 @@ onMounted(async () => {
     animation: pixel-bob-player 1.2s steps(1, end) infinite;
 }
 
+/* Forward attack animations from wrapper div down to the sprite */
+[class*="animate-mage"] img,
+[class*="animate-knight"] img {
+    animation: inherit;
+}
+
 .dragon-idle img {
     animation: pixel-bob-dragon 1.2s steps(1, end) infinite 0.4s;
+}
+
+/* Forward attack animations from wrapper div down to the dragon sprite */
+[class*="animate-dragon"] img {
+    animation: inherit;
 }
 </style>
