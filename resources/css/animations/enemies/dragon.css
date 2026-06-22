@@ -1,0 +1,166 @@
+/*
+* HIT EFFECTS
+*/
+
+/* Dragon recoil on hit */
+@keyframes dragon-hit {
+    0% {
+        transform: translateX(0) rotate(0deg) scaleX(1);
+        filter: brightness(1);
+    }
+    /* impact flash */
+    10% {
+        transform: translateX(-20px) rotate(-5deg) scaleX(0.92);
+        filter: brightness(3) hue-rotate(200deg);
+    }
+    /* stagger back */
+    25% {
+        transform: translateX(-30px) rotate(-8deg) scaleX(0.95);
+        filter: brightness(1.5) sepia(0.6);
+    }
+    /* wobble */
+    40% {
+        transform: translateX(-10px) rotate(4deg) scaleX(1.04);
+        filter: brightness(1);
+    }
+    55% {
+        transform: translateX(-20px) rotate(-3deg) scaleX(0.97);
+    }
+    70% {
+        transform: translateX(-8px) rotate(2deg) scaleX(1.02);
+    }
+    85% {
+        transform: translateX(-4px) rotate(-1deg);
+    }
+    100% {
+        transform: translateX(0) rotate(0deg) scaleX(1);
+        filter: brightness(1);
+    }
+}
+
+/* Dragon red damage flash */
+@keyframes dragon-flash {
+    0% {
+        filter: brightness(1) sepia(0);
+    }
+    10% {
+        filter: brightness(2) sepia(1) saturate(5) hue-rotate(-30deg);
+    }
+    30% {
+        filter: brightness(1.3) sepia(0.5) saturate(3) hue-rotate(-20deg);
+    }
+    100% {
+        filter: brightness(1) sepia(0);
+    }
+}
+
+/*
+* ATTACK EFFECTS
+*/
+
+/* Dragon pre-attack shake — rage building before counter */
+@keyframes dragon-shake {
+    0% {
+        transform: translateX(0) rotate(0deg);
+    }
+    15% {
+        transform: translateX(8px) rotate(4deg);
+    }
+    30% {
+        transform: translateX(-8px) rotate(-4deg);
+    }
+    45% {
+        transform: translateX(6px) rotate(3deg);
+    }
+    60% {
+        transform: translateX(-6px) rotate(-3deg);
+    }
+    80% {
+        transform: translateX(3px) rotate(1.5deg);
+    }
+    100% {
+        transform: translateX(0) rotate(0deg);
+    }
+}
+
+/* Dragon glows red after shaking — charging the fireball */
+@keyframes dragon-charge {
+    0% {
+        filter: brightness(1) saturate(1);
+    }
+    /* ember glow begins */
+    30% {
+        filter: brightness(1.4) saturate(2) sepia(0.4) hue-rotate(-20deg);
+    }
+    /* deep red surge */
+    70% {
+        filter: brightness(2) saturate(4) sepia(0.8) hue-rotate(-35deg);
+    }
+    /* peak charge — dragon pulses bright red */
+    100% {
+        filter: brightness(2.8) saturate(5) sepia(1) hue-rotate(-40deg);
+    }
+}
+
+/* Fireball travels from dragon toward the knight */
+@keyframes fireball-travel {
+    0% {
+        transform: translateX(0) scaleX(1) scaleY(1);
+        opacity: 1;
+    }
+    /* stretches as it accelerates */
+    20% {
+        transform: translateX(calc(var(--fireball-travel, -200px) * 0.1))
+            scaleX(1.4) scaleY(0.75);
+        opacity: 1;
+    }
+    /* mid-flight — fully elongated */
+    55% {
+        transform: translateX(calc(var(--fireball-travel, -200px) * 0.6))
+            scaleX(1.6) scaleY(0.65);
+        opacity: 1;
+    }
+    /* impact — squash and burst */
+    80% {
+        transform: translateX(var(--fireball-travel, -200px)) scaleX(0.6)
+            scaleY(1.5);
+        opacity: 1;
+    }
+    /* brief hold at squash peak so it reads clearly */
+    88% {
+        transform: translateX(var(--fireball-travel, -200px)) scaleX(0.6)
+            scaleY(1.5);
+        opacity: 1;
+    }
+    /* collapse inward — horizontal pinches first, avoids the stretch artifact */
+    95% {
+        transform: translateX(var(--fireball-travel, -200px)) scaleX(0)
+            scaleY(1.5);
+        opacity: 0.6;
+    }
+    /* fully gone */
+    100% {
+        transform: translateX(var(--fireball-travel, -200px)) scaleX(0)
+            scaleY(0);
+        opacity: 0;
+    }
+}
+
+/* Fireball core flicker — simulates living flame */
+@keyframes fireball-flicker {
+    0% {
+        filter: brightness(1.2) saturate(1.5) hue-rotate(0deg);
+    }
+    25% {
+        filter: brightness(1.8) saturate(2.5) hue-rotate(-15deg);
+    }
+    50% {
+        filter: brightness(1.4) saturate(2) hue-rotate(10deg);
+    }
+    75% {
+        filter: brightness(2) saturate(3) hue-rotate(-10deg);
+    }
+    100% {
+        filter: brightness(1.2) saturate(1.5) hue-rotate(0deg);
+    }
+}

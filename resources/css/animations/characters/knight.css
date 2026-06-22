@@ -1,0 +1,139 @@
+/*
+* NOTE: ATTACK EFFECTS
+*/
+
+/* Knight pre-attack shake — builds anticipation */
+@keyframes knight-shake {
+    0% {
+        transform: translateX(0) rotate(0deg);
+    }
+    15% {
+        transform: translateX(-6px) rotate(-3deg);
+    }
+    30% {
+        transform: translateX(6px) rotate(3deg);
+    }
+    45% {
+        transform: translateX(-4px) rotate(-2deg);
+    }
+    60% {
+        transform: translateX(4px) rotate(2deg);
+    }
+    100% {
+        transform: translateX(0) rotate(0deg);
+    }
+}
+
+/* Knight dash and slash */
+@keyframes knight-attack {
+    0% {
+        transform: translateX(0) scaleX(1);
+    }
+    /* quick lean forward */
+    10% {
+        transform: translateX(20px) scaleX(1.08);
+    }
+    /* burst dash across */
+    40% {
+        transform: translateX(var(--attack-travel, 220px)) scaleX(1.12);
+    }
+    /* slight overshoot then settle at slash position */
+    50% {
+        transform: translateX(calc(var(--attack-travel, 220px) - 15px))
+            scaleX(1);
+    }
+    /* hold at enemy briefly */
+    65% {
+        transform: translateX(calc(var(--attack-travel, 220px) - 15px))
+            scaleX(1);
+    }
+    /* snap back with momentum */
+    85% {
+        transform: translateX(-10px) scaleX(0.95);
+    }
+    100% {
+        transform: translateX(0) scaleX(1);
+    }
+}
+
+/* Flash effect on the knight during slash */
+@keyframes knight-flash {
+    0% {
+        filter: brightness(1);
+    }
+    45% {
+        filter: brightness(2.5) saturate(0.5);
+    }
+    60% {
+        filter: brightness(1);
+    }
+    100% {
+        filter: brightness(1);
+    }
+}
+
+/*
+* NOTE: HIT EFFECTS
+*/
+
+/* Knight hit by fireball — recoils and burns */
+@keyframes knight-hit {
+    0% {
+        transform: translateX(0) rotate(0deg) scaleX(1);
+        filter: brightness(1);
+    }
+    /* impact blast — thrown back */
+    8% {
+        transform: translateX(-18px) rotate(-6deg) scaleX(0.9);
+        filter: brightness(3.5) hue-rotate(-30deg) saturate(4);
+    }
+    /* stagger, still burning orange */
+    22% {
+        transform: translateX(-28px) rotate(-10deg) scaleX(0.93);
+        filter: brightness(2) sepia(1) saturate(4) hue-rotate(-20deg);
+    }
+    /* stumble forward — fighting gravity */
+    38% {
+        transform: translateX(-12px) rotate(5deg) scaleX(1.05);
+        filter: brightness(1.4) sepia(0.5) saturate(2);
+    }
+    /* wobble back */
+    55% {
+        transform: translateX(-18px) rotate(-4deg) scaleX(0.96);
+        filter: brightness(1.2);
+    }
+    70% {
+        transform: translateX(-8px) rotate(2deg) scaleX(1.02);
+        filter: brightness(1);
+    }
+    85% {
+        transform: translateX(-4px) rotate(-1deg);
+    }
+    /* settle back to stance */
+    100% {
+        transform: translateX(0) rotate(0deg) scaleX(1);
+        filter: brightness(1);
+    }
+}
+
+/* Knight burn flash — fire-toned damage colour (orange/red, not the white sword flash) */
+@keyframes knight-burn-flash {
+    0% {
+        filter: brightness(1) sepia(0);
+    }
+    /* ignition peak */
+    8% {
+        filter: brightness(3) sepia(1) saturate(6) hue-rotate(-25deg);
+    }
+    /* sustained burn */
+    30% {
+        filter: brightness(1.6) sepia(0.7) saturate(3) hue-rotate(-15deg);
+    }
+    /* embers fade */
+    65% {
+        filter: brightness(1.2) sepia(0.2) saturate(1.5);
+    }
+    100% {
+        filter: brightness(1) sepia(0);
+    }
+}
