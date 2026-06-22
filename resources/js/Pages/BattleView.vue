@@ -14,6 +14,7 @@ import { useWords } from "@/composables/battle/useWords";
 import { useGameStates } from "@/stores/useGameStates";
 import { computed, onMounted, ref, watch } from "vue";
 import { router } from "@inertiajs/vue3";
+import { useHealing } from "@/composables/potions/useHealing";
 
 const {
     status,
@@ -43,6 +44,7 @@ const {
     applyEnemyAttackAnimation,
 } = useAttack();
 const { animateCurrentSelectedWord } = useAnimation();
+const { applyHealing } = useHealing();
 
 // coordinator functions
 
@@ -252,6 +254,8 @@ onMounted(async () => {
                         "
                     >
                         <img
+                            @click="applyHealing"
+                            class="cursor-pointer"
                             src="/public/images/potion.gif"
                             alt="potion-imgs"
                         />
