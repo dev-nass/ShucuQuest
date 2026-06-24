@@ -29,6 +29,8 @@ const fireballClass = ref<string>();
 const currentWordAnimation = ref<string>();
 
 // HP STATES
+const MAX_PLAYER_HEALTH = ref<number>(5);
+const MAX_ENEMY_HEALTH = ref<number>(8);
 const playerHealth = ref<number>(1.5);
 const enemyHealth = ref<number>(0.5);
 
@@ -61,6 +63,8 @@ export function useGameStates() {
         currentWordAnimation,
 
         // HP STATES
+        MAX_PLAYER_HEALTH,
+        MAX_ENEMY_HEALTH,
         playerHealth,
         enemyHealth,
 

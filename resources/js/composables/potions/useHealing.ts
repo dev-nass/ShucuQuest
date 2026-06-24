@@ -1,13 +1,13 @@
 import { useGameStates } from "@/stores/useGameStates";
 
 export function useHealing() {
-    const { playerHealth } = useGameStates();
+    const { playerHealth, MAX_PLAYER_HEALTH } = useGameStates();
 
     const applyHealing = (): void => {
-        if (playerHealth.value >= 5) return;
+        if (playerHealth.value >= MAX_PLAYER_HEALTH.value) return;
 
-        // TODO: no hard coded MAX_PLAYERHEALTH  (5)
-        let healthDiff = Math.abs(playerHealth.value - 5);
+        let healthDiff = Math.abs(playerHealth.value - MAX_PLAYER_HEALTH.value);
+
         if (healthDiff == 2) playerHealth.value += 2;
         else if (healthDiff == 1) playerHealth.value += 1;
         else playerHealth.value += 3;
