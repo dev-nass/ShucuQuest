@@ -37,7 +37,7 @@ const {
 } = useGameStates();
 
 const { fetchData } = useFetchWords();
-const { initGame, toggleTile, applyRoundEndWalkIn, endGame } = useGame();
+const { initGame, toggleTile, endGame } = useGame();
 const { removeLetter } = useWords();
 const { updateWordDisplay } = useDisplay();
 const {
@@ -48,7 +48,7 @@ const {
     applyRogueAttackAnimation,
     applyEnemyAttackAnimation,
 } = useAttack();
-const { animateCurrentSelectedWord } = useAnimation();
+const { animateCurrentSelectedWord, animateRoundEndWalkIn } = useAnimation();
 const { applyHealing } = useHealing();
 
 // coordinator functions
@@ -81,7 +81,7 @@ async function handleSubmitAndAttackClick() {
     await applyEnemyAttackAnimation();
 
     clearSelection(); // this clear the selected words before attck
-    await applyRoundEndWalkIn();
+    await animateRoundEndWalkIn();
     endGame(); // this verify if isGameOVer is true or false
     isPlayersTurn.value = true;
 }

@@ -3,7 +3,8 @@ import { useAttack } from "./useAttack";
 
 export function useAnimation() {
     const { validateWord } = useAttack();
-    const { currentWordAnimation } = useGameStates();
+    const { currentWordAnimation, playerCharacterClass, enemyHealth } =
+        useGameStates();
 
     /**
      * Description: Animate the current selected word glow effect
@@ -22,7 +23,25 @@ export function useAnimation() {
         return (currentWordAnimation.value = "glow-intense");
     };
 
+    /**
+     * Description: Check if the round is over, if it's
+     *              is will apply the animation on player's char
+     */
+    const animateRoundEndWalkIn = async (): Promise<void> => {
+        if (enemyHealth.value >= 1) return;
+
+        await wait(500);
+        playerCharacterClass.value = "animate-walk-in";
+        await wait(5500);
+        playerCharacterClass.value = "";
+    };
+
+    function wait(ms: number): Promise<void> {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+    }
+
     return {
         animateCurrentSelectedWord,
+        animateRoundEndWalkIn,
     };
 }
