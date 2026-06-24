@@ -156,7 +156,7 @@ export function useAttack() {
     };
 
     const applyEnemyAttackAnimation = async (): Promise<void> => {
-        if (isGameOver.value) return;
+        if (enemyHealth.value <= 0 || isGameOver.value) return;
 
         // 4. Dragon counter-attack — shake builds rage
         dragonClass.value = "animate-dragon-shake";

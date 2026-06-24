@@ -14,10 +14,15 @@ const status = ref<string>("");
 
 // GAME STATES
 const RANDOM_LETTERS_COUNT: number = 16;
+const MAX_STAGE_ROUNDS = ref<number>(2); // means theres 2 enemy
+const currentRound = ref<number>(1); // current facing the 1st enemy
 const score = ref<number>(0);
 const isPlayersTurn = ref<boolean>(true); // state to be check before submitWord()
 const isGameOver = computed<boolean>(
-    () => playerHealth.value <= 0 || enemyHealth.value <= 0,
+    () =>
+        playerHealth.value <= 0 ||
+        (currentRound.value >= MAX_STAGE_ROUNDS.value &&
+            enemyHealth.value <= 0),
 );
 
 // ANIMATION STATES (UI)
@@ -51,6 +56,8 @@ export function useGameStates() {
 
         score,
 
+        MAX_STAGE_ROUNDS,
+        currentRound,
         isPlayersTurn,
         isGameOver,
 
