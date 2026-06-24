@@ -14,8 +14,8 @@ const status = ref<string>("");
 
 // GAME STATES
 const RANDOM_LETTERS_COUNT: number = 16;
-const MAX_STAGE_ROUNDS = ref<number>(2); // means theres 2 enemy
-const currentRound = ref<number>(1); // current facing the 1st enemy
+const MAX_STAGE_ROUNDS = ref<number>(3); // means theres 2 enemy
+const currentRound = ref<number>(3); // current facing the 1st enemy
 const score = ref<number>(0);
 const isPlayersTurn = ref<boolean>(true); // state to be check before submitWord()
 const isGameOver = computed<boolean>(
@@ -26,8 +26,8 @@ const isGameOver = computed<boolean>(
 );
 
 // ANIMATION STATES (UI)
-const playerCharacterClass = ref<string>();
-const dragonClass = ref<string>();
+const playerCharacterClass = ref<string>(); // for animations
+const enemyCharacterClass = ref<string>(); // for animations
 const playerFireballVisible = ref<boolean>(false); // used when selected char is mage
 const enemyFireballVisible = ref<boolean>(false);
 const fireballClass = ref<string>();
@@ -63,7 +63,7 @@ export function useGameStates() {
 
         // ANIMATION STATES
         playerCharacterClass,
-        dragonClass,
+        enemyCharacterClass,
         playerFireballVisible,
         enemyFireballVisible,
         fireballClass,

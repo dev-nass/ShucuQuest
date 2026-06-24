@@ -22,7 +22,7 @@ const {
     selected,
     currentWord,
     playerCharacterClass,
-    dragonClass,
+    enemyCharacterClass,
     playerFireballVisible,
     enemyFireballVisible,
     fireballClass,
@@ -34,6 +34,7 @@ const {
     isPlayersTurn,
     isGameOver,
     selectedChar,
+    currentRound,
 } = useGameStates();
 
 const { fetchData } = useFetchWords();
@@ -109,6 +110,18 @@ const characterSpriteSrc = computed(
     () =>
         loadCharacterSprite[selectedChar.value as Characters] ??
         "/public/images/knight.png",
+);
+
+const loadEnemyCharacterSprite: Record<number, string> = {
+    1: "images/dragon.png",
+    2: "images/slime.png",
+    3: "images/goblin.png",
+};
+
+const enemyCharacterSpriteSrc = computed(
+    () =>
+        loadEnemyCharacterSprite[currentRound.value] ??
+        "/public/images/dragon.png",
 );
 
 onMounted(async () => {
@@ -214,7 +227,7 @@ onMounted(async () => {
 
                         <!-- Right Character -->
                         <div
-                            :class="dragonClass"
+                            :class="enemyCharacterClass"
                             class="dragon-idle lg:flex-1 lg:flex lg:justify-end lg:pr-8"
                         >
                             <div
@@ -224,7 +237,7 @@ onMounted(async () => {
                                     <!-- Enemy Character -->
                                     <img
                                         v-if="enemyHealth > 0"
-                                        src="/public/images/dragon.png"
+                                        :src="enemyCharacterSpriteSrc"
                                         alt="dragon"
                                     />
 

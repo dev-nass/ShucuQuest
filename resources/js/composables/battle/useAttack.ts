@@ -16,7 +16,7 @@ export function useAttack() {
         isPlayersTurn,
 
         playerCharacterClass,
-        dragonClass,
+        enemyCharacterClass,
         playerFireballVisible,
         enemyFireballVisible,
         fireballClass,
@@ -99,12 +99,12 @@ export function useAttack() {
         // 2. Knight dashes + dragon gets hit simultaneously
         playerCharacterClass.value = "animate-knight-attack";
         await wait(220); // delay hit to sync with slash impact
-        dragonClass.value = "animate-dragon-hit";
+        enemyCharacterClass.value = "animate-dragon-hit";
 
         // 3. Clean up
         await wait(700);
         playerCharacterClass.value = "";
-        dragonClass.value = "";
+        enemyCharacterClass.value = "";
 
         applyPlayerAttackDamage();
     };
@@ -129,13 +129,13 @@ export function useAttack() {
         await wait(500); // sync hit to landing impact
 
         // 5. Dragon reacts, fireball disappears
-        dragonClass.value = "animate-dragon-hit";
+        enemyCharacterClass.value = "animate-dragon-hit";
         fireballClass.value = "";
         playerFireballVisible.value = false;
 
         // 6. Cleanup
         await wait(700);
-        dragonClass.value = "";
+        enemyCharacterClass.value = "";
 
         applyPlayerAttackDamage();
     };
@@ -147,11 +147,11 @@ export function useAttack() {
         // 2. Rogue shadow-steps + dragon gets hit simultaneously
         playerCharacterClass.value = "animate-rogue-attack";
         await wait(150); // shorter delay — rogue blinks in faster than knight's dash
-        dragonClass.value = "animate-dragon-hit";
+        enemyCharacterClass.value = "animate-dragon-hit";
         // 3. Clean up
         await wait(480);
         playerCharacterClass.value = "";
-        dragonClass.value = "";
+        enemyCharacterClass.value = "";
         applyPlayerAttackDamage();
     };
 
@@ -159,15 +159,15 @@ export function useAttack() {
         if (enemyHealth.value <= 0 || isGameOver.value) return;
 
         // 4. Dragon counter-attack — shake builds rage
-        dragonClass.value = "animate-dragon-shake";
+        enemyCharacterClass.value = "animate-dragon-shake";
         await wait(350);
 
         // 5. Dragon charges — glows red while fireball loads
-        dragonClass.value = "animate-dragon-charge";
+        enemyCharacterClass.value = "animate-dragon-charge";
         await wait(500);
 
         // 6. Fireball launched — show the fireball element and send it flying
-        dragonClass.value = "";
+        enemyCharacterClass.value = "";
         enemyFireballVisible.value = true;
         fireballClass.value = "animate-fireball";
 

@@ -65,11 +65,19 @@ export function useGame() {
         }
     };
 
+    const nextRound = (): void => {
+        if (enemyHealth.value >= 1) return;
+
+        // TODO: IMPLENENT A LOGIC THAT CHANGES THE SPRITE OF DRAGON TO SLIME
+        // MAKE THE ENEMEY HEALTH FULL AGAIN, BUT NOT FOR THE PLAYER
+        // THIS SHOULD BE ASYNC/AWAIT FN
+    };
+
     /**
      * Description: Everytime this fn is invoked it checks if it's game game or not
      *
      * 1. Set status — "Victory!" or "Defeated!" to show in the UI (BattleView.vue:65)
-     * 2. Trigger end-game animations — play a victory/defeat pose via playerCharacterClass / dragonClass
+     * 2. Trigger end-game animations — play a victory/defeat pose via playerCharacterClass / enemyCharacterClass
      * 3. Gate further input — toggle something (like isGameOver) so handleSubmitAndAttack
      early-returns and tile clicks are ignored
      * 4. Maybe show a "Play Again" overlay — so users can call initGame() and start fresh
