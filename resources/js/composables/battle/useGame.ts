@@ -12,6 +12,8 @@ export function useGame() {
         wordUsed,
         grid,
 
+        currentRound,
+        MAX_STAGE_ROUNDS,
         playerCharacterClass,
 
         score,
@@ -66,11 +68,10 @@ export function useGame() {
     };
 
     const nextRound = (): void => {
-        if (enemyHealth.value >= 1) return;
+        if (enemyHealth.value >= 1 || currentRound.value >= 3) return;
 
-        // TODO: IMPLENENT A LOGIC THAT CHANGES THE SPRITE OF DRAGON TO SLIME
-        // MAKE THE ENEMEY HEALTH FULL AGAIN, BUT NOT FOR THE PLAYER
-        // THIS SHOULD BE ASYNC/AWAIT FN
+        currentRound.value += 1;
+        enemyHealth.value = 1;
     };
 
     /**
@@ -95,6 +96,7 @@ export function useGame() {
     return {
         initGame,
         toggleTile,
+        nextRound,
         endGame,
     };
 }

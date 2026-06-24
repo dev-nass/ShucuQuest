@@ -38,7 +38,7 @@ const {
 } = useGameStates();
 
 const { fetchData } = useFetchWords();
-const { initGame, toggleTile, endGame } = useGame();
+const { initGame, toggleTile, nextRound, endGame } = useGame();
 const { removeLetter } = useWords();
 const { updateWordDisplay } = useDisplay();
 const {
@@ -83,6 +83,7 @@ async function handleSubmitAndAttackClick() {
 
     clearSelection(); // this clear the selected words before attck
     await animateRoundEndWalkIn();
+    nextRound();
     endGame(); // this verify if isGameOVer is true or false
     isPlayersTurn.value = true;
 }
@@ -119,9 +120,7 @@ const loadEnemyCharacterSprite: Record<number, string> = {
 };
 
 const enemyCharacterSpriteSrc = computed(
-    () =>
-        loadEnemyCharacterSprite[currentRound.value] ??
-        "/public/images/dragon.png",
+    () => loadEnemyCharacterSprite[currentRound.value] ?? "/images/dragon.png",
 );
 
 onMounted(async () => {
