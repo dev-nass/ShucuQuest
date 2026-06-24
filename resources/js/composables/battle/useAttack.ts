@@ -140,6 +140,21 @@ export function useAttack() {
         applyPlayerAttackDamage();
     };
 
+    const applyRogueAttackAnimation = async (): Promise<void> => {
+        // 1. Rogue coil (anticipation)
+        playerCharacterClass.value = "animate-rogue-coil";
+        await wait(180);
+        // 2. Rogue shadow-steps + dragon gets hit simultaneously
+        playerCharacterClass.value = "animate-rogue-attack";
+        await wait(150); // shorter delay — rogue blinks in faster than knight's dash
+        dragonClass.value = "animate-dragon-hit";
+        // 3. Clean up
+        await wait(480);
+        playerCharacterClass.value = "";
+        dragonClass.value = "";
+        applyPlayerAttackDamage();
+    };
+
     const applyEnemyAttackAnimation = async (): Promise<void> => {
         if (isGameOver.value) return;
 
@@ -214,6 +229,7 @@ export function useAttack() {
 
         applyKnightAttackAnimation,
         applyMageAttackAnimation,
+        applyRogueAttackAnimation,
         applyEnemyAttackAnimation,
     };
 }

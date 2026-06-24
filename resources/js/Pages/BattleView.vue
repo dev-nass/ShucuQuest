@@ -43,6 +43,7 @@ const {
     submitWord,
     applyKnightAttackAnimation,
     applyMageAttackAnimation,
+    applyRogueAttackAnimation,
     applyEnemyAttackAnimation,
 } = useAttack();
 const { animateCurrentSelectedWord } = useAnimation();
@@ -73,6 +74,7 @@ async function handleSubmitAndAttackClick() {
 
     if (selectedChar.value === "knight") await applyKnightAttackAnimation();
     else if (selectedChar.value === "mage") await applyMageAttackAnimation();
+    else if (selectedChar.value === "rogue") await applyRogueAttackAnimation();
 
     await applyEnemyAttackAnimation();
 

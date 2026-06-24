@@ -1,0 +1,140 @@
+/*
+ * NOTE: ATTACK EFFECTS
+ */
+
+/* Rogue pre-attack — quick coil, tight and controlled */
+@keyframes rogue-coil {
+    0% {
+        transform: translateX(0) scaleX(1);
+    }
+    30% {
+        transform: translateX(-8px) scaleX(0.88);
+    }
+    60% {
+        transform: translateX(-5px) scaleX(0.92);
+    }
+    100% {
+        transform: translateX(0) scaleX(1);
+    }
+}
+
+/* Rogue shadow-step dash — blinks across, no heavy lean */
+@keyframes rogue-attack {
+    0% {
+        transform: translateX(0) scaleX(1);
+        opacity: 1;
+    }
+    /* vanish into the dash */
+    18% {
+        transform: translateX(40px) scaleX(0.85);
+        opacity: 0.2;
+    }
+    /* reappear at strike position */
+    32% {
+        transform: translateX(var(--attack-travel, 220px)) scaleX(1.06);
+        opacity: 1;
+    }
+    /* hold at enemy — barely a pause */
+    48% {
+        transform: translateX(calc(var(--attack-travel, 220px) - 8px)) scaleX(1);
+        opacity: 1;
+    }
+    /* snap back — light, no momentum overshoot */
+    72% {
+        transform: translateX(-6px) scaleX(0.97);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(0) scaleX(1);
+        opacity: 1;
+    }
+}
+
+/* Rogue slash flash — cold violet/purple edge, not white heat */
+@keyframes rogue-flash {
+    0% {
+        filter: brightness(1);
+    }
+    32% {
+        filter: brightness(2.2) saturate(1.5) hue-rotate(60deg);
+    }
+    50% {
+        filter: brightness(1.4) saturate(1.2) hue-rotate(30deg);
+    }
+    100% {
+        filter: brightness(1);
+    }
+}
+
+/*
+ * NOTE: HIT EFFECTS
+ */
+
+/* Rogue hit — sharp stagger, quick recovery (lighter than knight) */
+@keyframes rogue-hit {
+    0% {
+        transform: translateX(0) rotate(0deg) scaleX(1);
+        filter: brightness(1);
+    }
+    /* impact — snapped back */
+    10% {
+        transform: translateX(-14px) rotate(-8deg) scaleX(0.92);
+        filter: brightness(3) hue-rotate(-30deg) saturate(3);
+    }
+    /* quick stumble */
+    28% {
+        transform: translateX(-20px) rotate(-12deg) scaleX(0.95);
+        filter: brightness(1.6) sepia(0.6) saturate(3) hue-rotate(-15deg);
+    }
+    /* spring back — rogues recover fast */
+    50% {
+        transform: translateX(-6px) rotate(4deg) scaleX(1.03);
+        filter: brightness(1.2);
+    }
+    72% {
+        transform: translateX(-3px) rotate(-1deg) scaleX(1);
+        filter: brightness(1);
+    }
+    /* settle */
+    100% {
+        transform: translateX(0) rotate(0deg) scaleX(1);
+        filter: brightness(1);
+    }
+}
+
+/* Rogue hit flash — cold shock, not fire */
+@keyframes rogue-hit-flash {
+    0% {
+        filter: brightness(1) hue-rotate(0deg);
+    }
+    /* cold blue-purple burst on impact */
+    10% {
+        filter: brightness(3.2) saturate(5) hue-rotate(60deg);
+    }
+    /* fade back */
+    35% {
+        filter: brightness(1.5) saturate(2) hue-rotate(30deg);
+    }
+    65% {
+        filter: brightness(1.1) saturate(1.2);
+    }
+    100% {
+        filter: brightness(1) hue-rotate(0deg);
+    }
+}
+
+.animate-rogue-coil {
+    animation: rogue-coil 0.18s ease-in-out;
+}
+
+.animate-rogue-attack {
+    animation:
+        rogue-attack 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+        rogue-flash 0.38s ease-in-out;
+}
+
+.animate-rogue-hit {
+    animation:
+        rogue-hit 0.48s cubic-bezier(0.36, 0.07, 0.19, 0.97),
+        rogue-hit-flash 0.48s ease-out;
+}

@@ -10,6 +10,7 @@
 
 @import "../css/animations/characters/knight.css";
 @import "../css/animations/characters/mage.css";
+@import "../css/animations/characters/rogue.css";
 @import "../css/animations/enemies/dragon.css";
 
 @theme {
