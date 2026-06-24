@@ -37,7 +37,7 @@ const {
 } = useGameStates();
 
 const { fetchData } = useFetchWords();
-const { initGame, toggleTile, endGame } = useGame();
+const { initGame, toggleTile, applyRoundEndWalkIn, endGame } = useGame();
 const { removeLetter } = useWords();
 const { updateWordDisplay } = useDisplay();
 const {
@@ -81,6 +81,7 @@ async function handleSubmitAndAttackClick() {
     await applyEnemyAttackAnimation();
 
     clearSelection(); // this clear the selected words before attck
+    await applyRoundEndWalkIn();
     endGame(); // this verify if isGameOVer is true or false
     isPlayersTurn.value = true;
 }
@@ -488,5 +489,56 @@ onMounted(async () => {
 /* Forward attack animations from wrapper div down to the dragon sprite */
 [class*="animate-dragon"] img {
     animation: inherit;
+}
+
+/* ============================================
+   ROUND END — WALK-IN ANIMATION
+   Add/remove .walk-in on the playerCharacterClass wrapper
+   ============================================ */
+
+@keyframes walk-in-slide {
+    0% {
+        transform: translateX(-60vw);
+    }
+    80% {
+        transform: translateX(0px);
+    }
+    88% {
+        transform: translateX(6px);
+    } /* tiny overshoot */
+    94% {
+        transform: translateX(-3px);
+    } /* settle back */
+    100% {
+        transform: translateX(0px);
+    }
+}
+
+/* Pixel footstep bob — layered on the inner img via player-idle */
+@keyframes walk-bob {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+/* Applied to the playerCharacterClass wrapper div */
+.walk-in {
+    animation: walk-in-slide 5.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* While walking, override the idle bob with a faster walk bob on the sprite */
+.walk-in img {
+    animation: walk-bob 0.3s steps(1, end) infinite !important;
+}
+
+/* Once arrived, kill the walk bob and restore idle */
+.walk-in-done img {
+    animation: pixel-bob-player 1.2s steps(1, end) infinite;
 }
 </style>

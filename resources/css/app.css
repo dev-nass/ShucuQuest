@@ -13,6 +13,8 @@
 @import "../css/animations/characters/rogue.css";
 @import "../css/animations/enemies/dragon.css";
 
+@import "../css/animations/walk-in.css";
+
 @theme {
     --font-sans:
         "Instrument Sans", ui-sans-serif, system-ui, sans-serif,

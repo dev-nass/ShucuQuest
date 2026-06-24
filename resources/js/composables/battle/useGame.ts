@@ -13,6 +13,8 @@ export function useGame() {
         wordUsed,
         grid,
 
+        playerCharacterClass,
+
         score,
 
         isGameOver,
@@ -34,7 +36,7 @@ export function useGame() {
         grid.value = [];
 
         playerHealth.value = 1;
-        enemyHealth.value = 5;
+        enemyHealth.value = 1;
     };
 
     /**
@@ -65,6 +67,23 @@ export function useGame() {
     };
 
     /**
+     * Description: Check if the round is over, if it's
+     *              is will apply the animation on player's char
+     */
+    const applyRoundEndWalkIn = async (): Promise<void> => {
+        if (enemyHealth.value >= 1) return;
+
+        await wait(500);
+        playerCharacterClass.value = "animate-walk-in";
+        await wait(5500);
+        playerCharacterClass.value = "";
+    };
+
+    function wait(ms: number): Promise<void> {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+    }
+
+    /**
      * Description: Everytime this fn is invoked it checks if it's game game or not
      *
      * 1. Set status — "Victory!" or "Defeated!" to show in the UI (BattleView.vue:65)
@@ -86,6 +105,7 @@ export function useGame() {
     return {
         initGame,
         toggleTile,
+        applyRoundEndWalkIn,
         endGame,
     };
 }

@@ -1,0 +1,37 @@
+@keyframes walk-in-slide {
+    0% {
+        transform: translateX(0px);
+    }
+    65% {
+        transform: translateX(65%);
+    }
+    72% {
+        transform: translateX(70%);
+    }
+    78% {
+        transform: translateX(60%);
+    }
+    100% {
+        transform: translateX(0px);
+    }
+}
+
+@keyframes walk-in-bob {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.animate-walk-in {
+    animation: walk-in-slide 5.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.animate-walk-in img {
+    animation: walk-in-bob 0.3s steps(1, end) infinite !important;
+}
