@@ -82,7 +82,7 @@ async function handleSubmitAndAttackClick() {
     await applyEnemyAttackAnimation();
 
     clearSelection(); // this clear the selected words before attck
-    await animateRoundEndWalkIn();
+    await animateRoundEndWalkIn(); // made await so it wont run immediately
     nextRound();
     endGame(); // this verify if isGameOVer is true or false
     isPlayersTurn.value = true;
