@@ -83,7 +83,7 @@ async function handleSubmitAndAttackClick() {
 
     clearSelection(); // this clear the selected words before attck
     await animateRoundEndWalkIn(); // made await so it wont run immediately
-    nextRound();
+    nextRound(); // update the states and increment the round count
     endGame(); // this verify if isGameOVer is true or false
     isPlayersTurn.value = true;
 }

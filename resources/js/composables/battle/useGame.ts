@@ -67,6 +67,10 @@ export function useGame() {
         }
     };
 
+    /**
+     * Description: Checks if the enemy health is >= to 1 or current round is 3,
+     *              if not it will update the states
+     * */
     const nextRound = (): void => {
         if (enemyHealth.value >= 1 || currentRound.value >= 3) return;
 
